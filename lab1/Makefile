@@ -1,5 +1,5 @@
 CC=g++
-FLAGS=-Wall -g
+FLAGS=-std=c++17 -Wall -g
 CFLAGS=$(FLAGS) -c
 
 once: obj/main obj/source obj/lab1
