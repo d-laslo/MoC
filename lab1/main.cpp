@@ -63,5 +63,8 @@ int main(int argc, char const *argv[])
     vector<vector<double>> plt_cpht_dist;
     plaintext_ciphertext_probability_distribution(ciphertext_indexes, probabilities, plt_cpht_dist);
 
+    vector<vector<double>> cond_plt_cpht_dist;
+    probability_distribution_plaintext_under_condition_ciphertext(ciphertext_indexes, probabilities, cond_plt_cpht_dist);
+
     return 0;
 }
