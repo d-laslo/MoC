@@ -57,9 +57,11 @@ int main(int argc, char const *argv[])
     map<string, vector<double>> probabilities {{"plaintext", prob[0]}, {"key", prob[1]}};
 
 
-    vector<double> ciphertext_dist;
-    ciphertext_probability_distribution(ciphertext_indexes, probabilities, ciphertext_dist);
+    vector<double> cpht_dist;
+    ciphertext_probability_distribution(ciphertext_indexes, probabilities, cpht_dist);
 
+    vector<vector<double>> plt_cpht_dist;
+    plaintext_ciphertext_probability_distribution(ciphertext_indexes, probabilities, plt_cpht_dist);
 
     return 0;
 }
