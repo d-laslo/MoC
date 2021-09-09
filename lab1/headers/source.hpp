@@ -6,3 +6,4 @@
 #include <regex>
 
 int parse_data(std::vector<std::vector<double>>&, std::ifstream&);
+int parse_data(std::vector<std::vector<int>>&, std::ifstream&);
