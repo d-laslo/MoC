@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <numeric>
+#include <algorithm>
 #include <map>
 
 
@@ -26,4 +27,10 @@ void probability_distribution_plaintext_under_condition_ciphertext(
     const std::map<std::string, std::vector<double>>& prob, 
     // indexes: [plaintext_index][ciphertext_index]
     std::vector<std::vector<double>>& result
+);
+
+u_int64_t bayes_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob,
+    u_int64_t ciphertext_index
 );

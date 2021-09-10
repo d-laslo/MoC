@@ -61,3 +61,20 @@ void probability_distribution_plaintext_under_condition_ciphertext(
         }
     }
 }
+
+
+u_int64_t bayes_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob,
+    u_int64_t ciphertext_index
+)
+{
+    std::vector<std::vector<double>> cond_plt_cpht_dist;
+    probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
+
+    return (std::max_element(cond_plt_cpht_dist.begin(), cond_plt_cpht_dist.end(), [ciphertext_index](std::vector<double> a, std::vector<double> b)
+        {
+            return (a[ciphertext_index] <= b[ciphertext_index]);
+        }
+    ) - cond_plt_cpht_dist.begin());
+}

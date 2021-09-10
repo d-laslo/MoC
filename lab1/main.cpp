@@ -66,5 +66,6 @@ int main(int argc, char const *argv[])
     vector<vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(ciphertext_indexes, probabilities, cond_plt_cpht_dist);
 
+    cout << bayes_function(ciphertext_indexes, probabilities, 0) << endl;
     return 0;
 }
