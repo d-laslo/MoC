@@ -9,6 +9,9 @@
 
 using namespace std;
 
+#define PATH_TO_SOURCE "./vars/"
+#define PATH_TO_RESULT "./result/"
+
 int main(int argc, char const *argv[])
 {
     
@@ -22,23 +25,17 @@ int main(int argc, char const *argv[])
         return a;
     }
     
-    ifstream fprob, ftable;
     string var_num = argv[1];
     var_num = (var_num.length() > 1 ? "" : "0") + var_num;
 
     vector<vector<double>> prob;
     vector<vector<int>> table;
     try {
-        fprob.open("vars/prob_" + var_num + ".csv");
-        if (parse_data(prob, fprob)) throw -2;
-        fprob.close();
-
-        ftable.open("vars/table_" + var_num + ".csv");
-        if (parse_data(table, ftable)) throw -2;
-        ftable.close();
+        read_from_file(PATH_TO_SOURCE + "prob_" + var_num + ".csv", prob);
+        read_from_file(PATH_TO_SOURCE + "table_" + var_num + ".csv", table);
     }
     catch(int a) {
-        cerr << "Parsing error";
+        cerr << "File reading error";
         return a;
     }
 
@@ -54,17 +51,21 @@ int main(int argc, char const *argv[])
     }
 
     // stores the probabilities of the plaintexts and keys
-    map<string, vector<double>> probabilities {{"plaintext", prob[0]}, {"key", prob[1]}};
+    map<string, vector<double>> probabilities{{"plaintext", prob[0]}, {"key", prob[1]}};
 
 
     vector<double> cpht_dist;
     ciphertext_probability_distribution(ciphertext_indexes, probabilities, cpht_dist);
+    write_to_file(PATH_TO_RESULT + "cpht_dist_" + var_num + ".csv", cpht_dist);
 
     vector<vector<double>> plt_cpht_dist;
     plaintext_ciphertext_probability_distribution(ciphertext_indexes, probabilities, plt_cpht_dist);
+    write_to_file(PATH_TO_SOURCE + "plt_cpht_dist_" + var_num + ".csv", plt_cpht_dist);
+
 
     vector<vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(ciphertext_indexes, probabilities, cond_plt_cpht_dist);
+    write_to_file(PATH_TO_SOURCE + "cond_plt_cpht_dist_" + var_num + ".csv", cond_plt_cpht_dist);
 
     cout << bayes_function(ciphertext_indexes, probabilities, 0) << endl;
     return 0;
