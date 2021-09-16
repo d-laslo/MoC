@@ -115,3 +115,19 @@ void write_to_file(const std::string&& file_name, const std::vector<std::vector<
     if (!write_data(data, file)) throw -2;
     file.close();
 }
+
+void transpose(std::vector<std::vector<double>>& matrix)
+{
+    // std::vector<std::vector<double>> transponded_matrix(matrix.size(), std::vector<double>(matrix[0].size()));
+    auto row_num = matrix.size();
+    auto column_num = matrix[0].size();
+    std::vector<std::vector<double>> transponded_matrix(column_num, std::vector<double>(row_num));
+     
+    for (u_int64_t i = 0; i < row_num; i++) {
+        for (u_int64_t j = 0; j < column_num; j++) {
+            transponded_matrix[j][i] = matrix[i][j];
+        }
+    }
+
+    matrix = std::move(transponded_matrix);
+}
