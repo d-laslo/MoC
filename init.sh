@@ -8,3 +8,12 @@ do
     else mkdir ./$i/obj
     fi
 done
+
+for i in lab*/ 
+do
+    if [ -d ./$i/result/ ]
+    then 
+        echo 'Folder "result" is existed'
+    else mkdir ./$i/result
+    fi
+done
