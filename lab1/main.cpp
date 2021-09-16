@@ -9,8 +9,8 @@
 
 using namespace std;
 
-#define PATH_TO_SOURCE "./vars/"
-#define PATH_TO_RESULT "./result/"
+#define PATH_TO_SOURCE (string)"./vars/"
+#define PATH_TO_RESULT (string)"./result/"
 
 int main(int argc, char const *argv[])
 {
@@ -60,12 +60,12 @@ int main(int argc, char const *argv[])
 
     vector<vector<double>> plt_cpht_dist;
     plaintext_ciphertext_probability_distribution(ciphertext_indexes, probabilities, plt_cpht_dist);
-    write_to_file(PATH_TO_SOURCE + "plt_cpht_dist_" + var_num + ".csv", plt_cpht_dist);
+    write_to_file(PATH_TO_RESULT + "plt_cpht_dist_" + var_num + ".csv", plt_cpht_dist);
 
 
     vector<vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(ciphertext_indexes, probabilities, cond_plt_cpht_dist);
-    write_to_file(PATH_TO_SOURCE + "cond_plt_cpht_dist_" + var_num + ".csv", cond_plt_cpht_dist);
+    write_to_file(PATH_TO_RESULT + "cond_plt_cpht_dist_" + var_num + ".csv", cond_plt_cpht_dist);
 
     cout << bayes_function(ciphertext_indexes, probabilities, 0) << endl;
     return 0;

@@ -83,15 +83,13 @@ int write_data(const std::vector<double>& data, std::ofstream& file)
     else {
         return 0;
     }
-    
-
     return 1;
 }
 
 int write_data(const std::vector<std::vector<double>>& data, std::ofstream& file)
 {
     if (file.is_open()) {
-        for (auto row : data) {
+        for (const auto& row : data) {
             for (auto col_data : row) {
                 file <<  col_data << ",";
             }
