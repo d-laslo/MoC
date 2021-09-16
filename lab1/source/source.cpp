@@ -7,7 +7,7 @@ int parse_data(std::vector<std::vector<double>>& result, std::ifstream& file)
     {
         std::regex rgx{R"(\d+\.?\d*)"};
         const std::vector<std::smatch> rgx_res{
-            std::sregex_iterator{line.begin(), line.end(), rgx},
+            std::sregex_iterator{ALL(line), rgx},
             std::sregex_iterator{}
         };
         std::vector<double> res;
@@ -36,7 +36,7 @@ int parse_data(std::vector<std::vector<int>>& result, std::ifstream& file)
     {
         std::regex rgx{R"(\d+\.?\d*)"};
         const std::vector<std::smatch> rgx_res{
-            std::sregex_iterator{line.begin(), line.end(), rgx},
+            std::sregex_iterator{ALL(line), rgx},
             std::sregex_iterator{}
         };
         std::vector<int> res;

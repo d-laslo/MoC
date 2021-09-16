@@ -7,7 +7,7 @@ void ciphertext_probability_distribution(
 )
 {
     for (auto cpht_indx: table) {
-        result.push_back(std::accumulate(cpht_indx.begin(), cpht_indx.end(), 0.,
+        result.push_back(std::accumulate(ALL(cpht_indx), 0.,
             [&prob](double result, const std::map<std::string, int>& index)
             {
                 return result + prob.at("key")[index.at("key")] * prob.at("plaintext")[index.at("plaintext")];
@@ -29,7 +29,7 @@ void plaintext_ciphertext_probability_distribution(
         auto& curr_plt = *prev(result.end());
         for (auto cpht_indx: table) {
             curr_plt.push_back(
-                prob.at("plaintext")[plt_indx] * std::accumulate(cpht_indx.begin(), cpht_indx.end(), 0.,
+                prob.at("plaintext")[plt_indx] * std::accumulate(ALL(cpht_indx), 0.,
                 [&prob, plt_indx](double result, const std::map<std::string, int>& index)
                 {
                     return  ((u_int64_t)index.at("plaintext") == plt_indx ? result + prob.at("key")[index.at("key")] : result);
