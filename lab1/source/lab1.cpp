@@ -72,9 +72,76 @@ u_int64_t bayes_function(
     std::vector<std::vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
 
-    return (std::max_element(cond_plt_cpht_dist.begin(), cond_plt_cpht_dist.end(), [ciphertext_index](std::vector<double> a, std::vector<double> b)
+    return (std::max_element(ALL(cond_plt_cpht_dist), [ciphertext_index](auto a, auto b)
         {
-            return (a[ciphertext_index] <= b[ciphertext_index]);
+            return (a[ciphertext_index] < b[ciphertext_index]);
         }
     ) - cond_plt_cpht_dist.begin());
+}
+
+u_int64_t bayes_function(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    u_int64_t ciphertext_index
+)
+{
+    return (std::max_element(ALL(cond_plt_cpht_dist), [ciphertext_index](auto a, auto b)
+        {
+            return (a[ciphertext_index] < b[ciphertext_index]);
+        }
+    ) - cond_plt_cpht_dist.begin());
+}
+
+u_int64_t stohastic_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob,
+    u_int64_t ciphertext_index
+)
+{
+    std::vector<std::vector<double>> cond_plt_cpht_dist;
+    probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
+
+    std::vector<double> distribution;
+    generate_distribution(cond_plt_cpht_dist, ciphertext_index, distribution);
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::discrete_distribution<> d(ALL(distribution));
+
+    return d(gen);
+}
+
+u_int64_t stohastic_function(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    u_int64_t ciphertext_index
+)
+{
+    std::vector<double> distribution;
+    generate_distribution(cond_plt_cpht_dist, ciphertext_index, distribution);
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::discrete_distribution<> d(ALL(distribution));
+
+    return d(gen);
+}
+
+void generate_distribution(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist, 
+    u_int64_t ciphertext_index, 
+    std::vector<double>& distribution
+)
+{
+    auto max = (*std::max_element(ALL(cond_plt_cpht_dist), [ciphertext_index](auto a, auto b) 
+    {
+        return a[ciphertext_index] < b[ciphertext_index];
+    }))[ciphertext_index];
+
+    auto max_num = std::accumulate(ALL(cond_plt_cpht_dist), 0, [ciphertext_index, max](auto a, auto b)
+    {
+        return a + (b[ciphertext_index] == max ? 1 : 0);
+    });
+
+    for (const auto& plt : cond_plt_cpht_dist) {
+        distribution.push_back(plt[ciphertext_index] == max ? 1. / max_num : 0);
+    }
 }

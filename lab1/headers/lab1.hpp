@@ -3,6 +3,8 @@
 #include <numeric>
 #include <algorithm>
 #include <map>
+#include <random>
+#include "defines.hpp"
 
 
 const u_int64_t M = 20;
@@ -33,4 +35,26 @@ u_int64_t bayes_function(
     const std::vector<std::vector<std::map<std::string, int>>>& table, 
     const std::map<std::string, std::vector<double>>& prob,
     u_int64_t ciphertext_index
+);
+
+u_int64_t bayes_function(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    u_int64_t ciphertext_index
+);
+
+u_int64_t stohastic_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob,
+    u_int64_t ciphertext_index
+);
+
+u_int64_t stohastic_function(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    u_int64_t ciphertext_index
+);
+
+void generate_distribution(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist, 
+    u_int64_t ciphertext_index, 
+    std::vector<double>& distribution
 );
