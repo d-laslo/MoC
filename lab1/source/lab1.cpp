@@ -79,6 +79,7 @@ u_int64_t bayes_function(
     ) - cond_plt_cpht_dist.begin());
 }
 
+
 u_int64_t bayes_function(
     const std::vector<std::vector<double>>& cond_plt_cpht_dist,
     u_int64_t ciphertext_index
@@ -90,6 +91,7 @@ u_int64_t bayes_function(
         }
     ) - cond_plt_cpht_dist.begin());
 }
+
 
 u_int64_t stohastic_function(
     const std::vector<std::vector<std::map<std::string, int>>>& table, 
@@ -110,6 +112,7 @@ u_int64_t stohastic_function(
     return d(gen);
 }
 
+
 u_int64_t stohastic_function(
     const std::vector<std::vector<double>>& cond_plt_cpht_dist,
     u_int64_t ciphertext_index
@@ -124,6 +127,7 @@ u_int64_t stohastic_function(
 
     return d(gen);
 }
+
 
 void generate_distribution(
     const std::vector<std::vector<double>>& cond_plt_cpht_dist, 
@@ -143,5 +147,19 @@ void generate_distribution(
 
     for (const auto& plt : cond_plt_cpht_dist) {
         distribution.push_back(plt[ciphertext_index] == max ? 1. / max_num : 0);
+    }
+}
+
+
+void stohastic_matrix(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    std::vector<std::vector<double>>& stohastic_matrix
+)
+{
+    for(u_int64_t i = 0; i < cond_plt_cpht_dist[0].size(); i++)
+    {
+        std::vector<double> tmp;
+        generate_distribution(cond_plt_cpht_dist, i, tmp);
+        stohastic_matrix.push_back(std::move(tmp));
     }
 }

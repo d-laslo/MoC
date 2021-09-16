@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <map>
 #include <random>
+#include "source.hpp"
 #include "defines.hpp"
 
 
@@ -57,4 +58,9 @@ void generate_distribution(
     const std::vector<std::vector<double>>& cond_plt_cpht_dist, 
     u_int64_t ciphertext_index, 
     std::vector<double>& distribution
+);
+
+void stohastic_matrix(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    std::vector<std::vector<double>>& stohastic_matrix
 );
