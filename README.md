@@ -1,11 +1,11 @@
 
-# Foobar
+# Methods of Cryptoanalisis 
 
 The labaratory tasks for university course of Methods of Cryptoanalisis
 
 ## Requirements
 
-g++ compiller 
+g++ compiller,
 Make 
 
 
@@ -17,6 +17,10 @@ The instantiation of folder hierarchy is required, so type command:
 sudo chmod 777 init.sh
 ```
 Enter password, if it is necessary.
+Than run the init script.
+```bash
+./init.sh
+```
 Than we should go to folder. For example:
 ```bash
 cd lab1
