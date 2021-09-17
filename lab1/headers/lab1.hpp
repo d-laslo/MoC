@@ -64,3 +64,27 @@ void stohastic_matrix(
     const std::vector<std::vector<double>>& cond_plt_cpht_dist,
     std::vector<std::vector<double>>& stohastic_matrix
 );
+
+bool bayes_loss_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob,
+    u_int64_t ciphertext_index,   
+    u_int64_t plaintext
+);
+
+bool bayes_loss_function(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    u_int64_t ciphertext_index, 
+    u_int64_t plaintext
+);
+
+double arg_bayes_loss_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob,
+    u_int64_t plaintext
+);
+
+double arg_bayes_loss_function(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    u_int64_t plaintext
+);

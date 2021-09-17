@@ -163,3 +163,36 @@ void stohastic_matrix(
         stohastic_matrix.push_back(std::move(tmp));
     }
 }
+
+
+bool bayes_loss_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob,
+    u_int64_t ciphertext_index,   
+    u_int64_t plaintext
+)
+{
+    return bayes_function(table, prob, ciphertext_index) != plaintext;
+}
+
+
+bool bayes_loss_function(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    u_int64_t ciphertext_index, 
+    u_int64_t plaintext
+)
+{
+    return bayes_function(cond_plt_cpht_dist, ciphertext_index) != plaintext;
+}
+
+
+// double arg_bayes_loss_function(
+//     const std::vector<std::vector<std::map<std::string, int>>>& table, 
+//     const std::map<std::string, std::vector<double>>& prob,
+//     u_int64_t plaintext
+// );
+
+// double arg_bayes_loss_function(
+//     const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+//     u_int64_t plaintext
+// );
