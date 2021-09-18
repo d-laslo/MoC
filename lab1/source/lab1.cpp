@@ -72,11 +72,7 @@ u_int64_t bayes_function(
     std::vector<std::vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
 
-    return (std::max_element(ALL(cond_plt_cpht_dist), [ciphertext_index](auto a, auto b)
-        {
-            return (a[ciphertext_index] < b[ciphertext_index]);
-        }
-    ) - cond_plt_cpht_dist.begin());
+    return bayes_function(cond_plt_cpht_dist, ciphertext_index);
 }
 
 
@@ -102,14 +98,7 @@ u_int64_t stohastic_function(
     std::vector<std::vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
 
-    std::vector<double> distribution;
-    generate_distribution(cond_plt_cpht_dist, ciphertext_index, distribution);
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::discrete_distribution<> d(ALL(distribution));
-
-    return d(gen);
+    return stohastic_function(cond_plt_cpht_dist, ciphertext_index);
 }
 
 
@@ -229,6 +218,7 @@ double avg_bayes_loss_function(
 
     std::vector<std::vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
+
     return avg_bayes_loss_function(cpht_dist, cond_plt_cpht_dist);
 }
 
