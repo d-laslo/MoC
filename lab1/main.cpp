@@ -6,6 +6,7 @@
 #include <numeric>
 #include "headers/lab1.hpp"
 #include "headers/source.hpp"
+#include "headers/defines.hpp"
 
 using namespace std;
 
@@ -67,6 +68,15 @@ int main(int argc, char const *argv[])
     probability_distribution_plaintext_under_condition_ciphertext(ciphertext_indexes, probabilities, cond_plt_cpht_dist);
     write_to_file(PATH_TO_RESULT + "cond_plt_cpht_dist_" + var_num + ".csv", cond_plt_cpht_dist);
 
-    cout << bayes_function(ciphertext_indexes, probabilities, 0) << endl;
+    // for (auto i = 0; i < 20; i++)
+    // {
+    //     cout << bayes_loss_function(cond_plt_cpht_dist,0, i) << endl;
+    // }
+
+    cout << avg_bayes_loss_function(plt_cpht_dist, cond_plt_cpht_dist) << endl;
+    
+    //cout << stohastic_function(ciphertext_indexes, probabilities, 5) << endl;
+    // vector<vector<double>> m;
+    // stohastic_matrix(cond_plt_cpht_dist, m);
     return 0;
 }
