@@ -151,6 +151,7 @@ void stohastic_matrix(
         generate_distribution(cond_plt_cpht_dist, i, tmp);
         stohastic_matrix.push_back(std::move(tmp));
     }
+    transpose(stohastic_matrix);
 }
 
 
@@ -222,6 +223,7 @@ double avg_bayes_loss_function(
     return avg_bayes_loss_function(cpht_dist, cond_plt_cpht_dist);
 }
 
+
 double avg_bayes_loss_function(
     const std::vector<double>& cpht_dist,
     const std::vector<std::vector<double>>& cond_plt_cpht_dist
@@ -232,5 +234,34 @@ double avg_bayes_loss_function(
     {
         cpht_index++;
         return a + b * (1 - cond_plt_cpht_dist[bayes_function(cond_plt_cpht_dist, cpht_index)][cpht_index]);
+    });
+}
+
+
+double avg_stohastic_loss_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob
+);
+
+double avg_stohastic_loss_function(
+    const std::vector<double>& cpht_dist,
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist
+)
+{
+    
+    std::vector<std::vector<double>> st_matrix;
+    stohastic_matrix(cond_plt_cpht_dist, st_matrix);
+
+    u_int64_t index_cpht = -1;
+    u_int64_t index_plt = -1;
+    return std::accumulate(ALL(cpht_dist), .0, [&](auto a, auto b)
+    {
+        index_cpht++;
+        index_plt = -1;
+        return a + b * (1 - std::accumulate(ALL(cond_plt_cpht_dist), .0, [&](auto a, auto b)
+        {
+            index_plt++;
+            return a + b[index_cpht] * st_matrix[index_plt][index_cpht];
+        }));
     });
 }

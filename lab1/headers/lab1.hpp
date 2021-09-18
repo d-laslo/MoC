@@ -92,3 +92,13 @@ double avg_bayes_loss_function(
     const std::vector<double>& cpht_dist,
     const std::vector<std::vector<double>>& cond_plt_cpht_dist
 );
+
+double avg_stohastic_loss_function(
+    const std::vector<std::vector<std::map<std::string, int>>>& table, 
+    const std::map<std::string, std::vector<double>>& prob
+);
+
+double avg_stohastic_loss_function(
+    const std::vector<double>& cpht_dist,
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist
+);
