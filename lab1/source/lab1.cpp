@@ -241,7 +241,16 @@ double avg_bayes_loss_function(
 double avg_stohastic_loss_function(
     const std::vector<std::vector<std::map<std::string, int>>>& table, 
     const std::map<std::string, std::vector<double>>& prob
-);
+)
+{
+    std::vector<double> cpht_dist;
+    ciphertext_probability_distribution(table, prob, cpht_dist);
+
+    std::vector<std::vector<double>> cond_plt_cpht_dist;
+    probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
+    
+    return avg_stohastic_loss_function(cpht_dist, cond_plt_cpht_dist);
+}
 
 double avg_stohastic_loss_function(
     const std::vector<double>& cpht_dist,
