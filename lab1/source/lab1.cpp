@@ -140,6 +140,20 @@ void generate_distribution(
 }
 
 
+void bayes_matrix(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    std::vector<std::vector<double>>& bayes_matrix
+)
+{
+    bayes_matrix = std::move(std::vector<std::vector<double>> (cond_plt_cpht_dist.size(), std::vector<double> (cond_plt_cpht_dist[0].size(), 0)));
+
+    for (u_int64_t cpht_index = 0; cpht_index < cond_plt_cpht_dist[0].size(); cpht_index++) {
+        bayes_matrix[bayes_function(cond_plt_cpht_dist, cpht_index)][cpht_index] = 1;
+    }
+    // transpose(bayes_matrix);
+}
+
+
 void stohastic_matrix(
     const std::vector<std::vector<double>>& cond_plt_cpht_dist,
     std::vector<std::vector<double>>& stohastic_matrix

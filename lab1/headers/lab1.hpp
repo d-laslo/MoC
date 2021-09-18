@@ -60,6 +60,11 @@ void generate_distribution(
     std::vector<double>& distribution
 );
 
+void bayes_matrix(
+    const std::vector<std::vector<double>>& cond_plt_cpht_dist,
+    std::vector<std::vector<double>>& bayes_matrix
+);
+
 void stohastic_matrix(
     const std::vector<std::vector<double>>& cond_plt_cpht_dist,
     std::vector<std::vector<double>>& stohastic_matrix
