@@ -186,35 +186,61 @@ bool bayes_loss_function(
 }
 
 
+// double avg_bayes_loss_function(
+//     const std::vector<std::vector<std::map<std::string, int>>>& table, 
+//     const std::map<std::string, std::vector<double>>& prob
+// )
+// {
+//     std::vector<std::vector<double>> plt_cpht_dist;
+//     plaintext_ciphertext_probability_distribution(table, prob, plt_cpht_dist);
+
+//     std::vector<std::vector<double>> cond_plt_cpht_dist;
+//     probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
+//     return avg_bayes_loss_function(cond_plt_cpht_dist, plt_cpht_dist);
+// }
+
+
+// double avg_bayes_loss_function(
+//     const std::vector<std::vector<double>>& plt_cpht_dist,
+//     const std::vector<std::vector<double>>& cond_plt_cpht_dist
+// )
+// {
+//     u_int64_t index_plt = -1;
+//     u_int64_t index_cpht = -1;
+//     return std::accumulate(ALL(plt_cpht_dist), .0, [&](auto a, auto b)
+//     {
+//         index_plt++;
+//         index_cpht = -1;
+//         return a + std::accumulate(ALL(b), .0, [&](auto a, auto b)
+//         {
+//             index_cpht++;
+//             return a + (double)bayes_loss_function(cond_plt_cpht_dist, index_cpht, index_plt) * b;
+//         });
+//     });
+// }
+
 double avg_bayes_loss_function(
     const std::vector<std::vector<std::map<std::string, int>>>& table, 
     const std::map<std::string, std::vector<double>>& prob
 )
 {
-    std::vector<std::vector<double>> plt_cpht_dist;
-    plaintext_ciphertext_probability_distribution(table, prob, plt_cpht_dist);
+    std::vector<double> cpht_dist;
+    ciphertext_probability_distribution(table, prob, cpht_dist);
 
     std::vector<std::vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(table, prob, cond_plt_cpht_dist);
-    return avg_bayes_loss_function(cond_plt_cpht_dist, plt_cpht_dist);
+    return avg_bayes_loss_function(cpht_dist, cond_plt_cpht_dist);
 }
 
-
 double avg_bayes_loss_function(
-    const std::vector<std::vector<double>>& plt_cpht_dist,
+    const std::vector<double>& cpht_dist,
     const std::vector<std::vector<double>>& cond_plt_cpht_dist
 )
 {
-    u_int64_t index_plt = -1;
-    u_int64_t index_cpht = -1;
-    return std::accumulate(ALL(plt_cpht_dist), .0, [&](auto a, auto b)
+    u_int64_t cpht_index = -1;
+    return std::accumulate(ALL(cpht_dist), .0, [&](auto a, auto b)
     {
-        index_plt++;
-        index_cpht = -1;
-        return a + std::accumulate(ALL(b), .0, [&](auto a, auto b)
-        {
-            index_cpht++;
-            return a + (double)bayes_loss_function(cond_plt_cpht_dist, index_cpht, index_plt) * b;
-        });
+        cpht_index++;
+        return a + b * (1 - cond_plt_cpht_dist[bayes_function(cond_plt_cpht_dist, cpht_index)][cpht_index]);
     });
 }
