@@ -70,13 +70,25 @@ int main(int argc, char const *argv[])
     transpose(cond_plt_cpht_dist);
     write_to_file(PATH_TO_RESULT + "cond_plt_cpht_dist_" + var_num + ".csv", cond_plt_cpht_dist);
 
+    vector<vector<double>> bayes_matrix_result;
+    bayes_matrix(cond_plt_cpht_dist,bayes_matrix_result);
+    transpose(bayes_matrix_result);
+    write_to_file(PATH_TO_RESULT + "bayes_matrix"+ var_num + ".csv",bayes_matrix_result);
+
+    vector<vector<double>> stochastic_matrix_result;
+    stohastic_matrix(cond_plt_cpht_dist,stochastic_matrix_result);
+    transpose(stochastic_matrix_result);
+    write_to_file(PATH_TO_RESULT + "stochastic_matrix"+ var_num + ".csv",stochastic_matrix_result);
+
+    
     // for (auto i = 0; i < 20; i++)
     // {
     //     cout << bayes_loss_function(cond_plt_cpht_dist,0, i) << endl;
     // }
 
-    cout << avg_bayes_loss_function(plt_cpht_dist, cond_plt_cpht_dist) << endl;
-    
+    cout << "Average bayes loss function: " << avg_bayes_loss_function(cpht_dist, cond_plt_cpht_dist) << endl;
+    cout << "Average stochastic loss function: "<< avg_stohastic_loss_function(cpht_dist,cond_plt_cpht_dist)<<endl;
+
     //cout << stohastic_function(ciphertext_indexes, probabilities, 5) << endl;
     // vector<vector<double>> m;
     // stohastic_matrix(cond_plt_cpht_dist, m);
