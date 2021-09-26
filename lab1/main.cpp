@@ -73,12 +73,12 @@ int main(int argc, char const *argv[])
     vector<vector<double>> bayes_matrix_result;
     bayes_matrix(cond_plt_cpht_dist,bayes_matrix_result);
     transpose(bayes_matrix_result);
-    write_to_file(PATH_TO_RESULT + "bayes_matrix"+ var_num + ".csv",bayes_matrix_result);
+    write_to_file(PATH_TO_RESULT + "bayes_matrix_"+ var_num + ".csv",bayes_matrix_result);
 
     vector<vector<double>> stochastic_matrix_result;
     stohastic_matrix(cond_plt_cpht_dist,stochastic_matrix_result);
     transpose(stochastic_matrix_result);
-    write_to_file(PATH_TO_RESULT + "stochastic_matrix"+ var_num + ".csv",stochastic_matrix_result);
+    write_to_file(PATH_TO_RESULT + "stochastic_matrix_"+ var_num + ".csv",stochastic_matrix_result);
 
     
     // for (auto i = 0; i < 20; i++)
