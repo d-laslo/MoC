@@ -13,6 +13,8 @@ using namespace std;
 #define PATH_TO_SOURCE (string)"./vars/"
 #define PATH_TO_RESULT (string)"./result/"
 
+
+
 int main(int argc, char const *argv[])
 {
     
@@ -61,23 +63,21 @@ int main(int argc, char const *argv[])
 
     vector<vector<double>> plt_cpht_dist;
     plaintext_ciphertext_probability_distribution(ciphertext_indexes, probabilities, plt_cpht_dist);
-    transpose(plt_cpht_dist);
     write_to_file(PATH_TO_RESULT + "plt_cpht_dist_" + var_num + ".csv", plt_cpht_dist);
 
 
     vector<vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(ciphertext_indexes, probabilities, cond_plt_cpht_dist);
-    transpose(cond_plt_cpht_dist);
     write_to_file(PATH_TO_RESULT + "cond_plt_cpht_dist_" + var_num + ".csv", cond_plt_cpht_dist);
 
     // for (auto i = 0; i < 20; i++)
     // {
-    //     cout << bayes_loss_function(cond_plt_cpht_dist,0, i) << endl;
+    //     cout << bayes_function(cond_plt_cpht_dist,i) << endl;
     // }
 
-    cout << avg_bayes_loss_function(plt_cpht_dist, cond_plt_cpht_dist) << endl;
+    cout << avg_bayes_loss_function(cpht_dist, cond_plt_cpht_dist) << endl;
     
-    //cout << stohastic_function(ciphertext_indexes, probabilities, 5) << endl;
+    // cout << stohastic_function(ciphertext_indexes, probabilities, 5) << endl;
     // vector<vector<double>> m;
     // stohastic_matrix(cond_plt_cpht_dist, m);
     return 0;
