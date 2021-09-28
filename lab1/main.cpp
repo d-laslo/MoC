@@ -63,22 +63,36 @@ int main(int argc, char const *argv[])
 
     vector<vector<double>> plt_cpht_dist;
     plaintext_ciphertext_probability_distribution(ciphertext_indexes, probabilities, plt_cpht_dist);
+<<<<<<< HEAD
     write_to_file(PATH_TO_RESULT + "plt_cpht_dist_" + var_num + ".csv", plt_cpht_dist);
 
 
     vector<vector<double>> cond_plt_cpht_dist;
     probability_distribution_plaintext_under_condition_ciphertext(ciphertext_indexes, probabilities, cond_plt_cpht_dist);
     write_to_file(PATH_TO_RESULT + "cond_plt_cpht_dist_" + var_num + ".csv", cond_plt_cpht_dist);
+=======
+    auto cp_plt_cpht_dist = plt_cpht_dist;
+    transpose(cp_plt_cpht_dist);
+    write_to_file(PATH_TO_RESULT + "plt_cpht_dist_" + var_num + ".csv", cp_plt_cpht_dist);
+
+    vector<vector<double>> cond_plt_cpht_dist;
+    probability_distribution_plaintext_under_condition_ciphertext(ciphertext_indexes, probabilities, cond_plt_cpht_dist);
+    auto cp_cond_plt_cpht_dist = cond_plt_cpht_dist;
+    transpose(cp_cond_plt_cpht_dist);
+    write_to_file(PATH_TO_RESULT + "cond_plt_cpht_dist_" + var_num + ".csv", cp_cond_plt_cpht_dist);
+>>>>>>> b9b0bfe409344446fe8c64fffaf3824671575179
 
     vector<vector<double>> bayes_matrix_result;
     bayes_matrix(cond_plt_cpht_dist,bayes_matrix_result);
-    transpose(bayes_matrix_result);
-    write_to_file(PATH_TO_RESULT + "bayes_matrix_"+ var_num + ".csv",bayes_matrix_result);
+    auto cp_bayes_matrix_result = bayes_matrix_result;
+    transpose(cp_bayes_matrix_result);
+    write_to_file(PATH_TO_RESULT + "bayes_matrix_"+ var_num + ".csv",cp_bayes_matrix_result);
 
     vector<vector<double>> stochastic_matrix_result;
     stohastic_matrix(cond_plt_cpht_dist,stochastic_matrix_result);
-    transpose(stochastic_matrix_result);
-    write_to_file(PATH_TO_RESULT + "stochastic_matrix_"+ var_num + ".csv",stochastic_matrix_result);
+    auto cp_stochastic_matrix_result = stochastic_matrix_result;
+    transpose(cp_stochastic_matrix_result);
+    write_to_file(PATH_TO_RESULT + "stochastic_matrix_"+ var_num + ".csv",cp_stochastic_matrix_result);
 
     
     // for (auto i = 0; i < 20; i++)
