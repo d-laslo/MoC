@@ -69,12 +69,13 @@ class Criterion:
             return False
         return True
     
-    def structuralCriterian(self, path_to_text: str, threshold: int) -> bool:
+    def structuralCriterian(self, path_to_text: str, threshold: float) -> bool:
         archive = zipfile.ZipFile(f'{path}/tmp.zip', 'w')
         archive.write(path_to_text)
         statinfo = 100 * abs(os.stat(path_to_text).st_size - os.stat(f'{path}/tmp.zip').st_size) / os.stat(path_to_text).st_size
-        print(statinfo)
-        tt = 0
+        if statinfo > threshold:
+            return True
+        return False
 
 
 def main():
