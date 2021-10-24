@@ -5,3 +5,4 @@ once
 *.log
 *.aux
 *.out
+__pycache__
