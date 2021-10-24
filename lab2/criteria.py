@@ -50,7 +50,11 @@ class Criterion:
         return False
 
     def criterian40(self, text: str, threshold: int) -> bool:
-        pass
+        I = self.__compliance_index(n_gram_frequency(text, self.__n_grams_len))
+
+        if abs(I - self.__compliance_index_language) > threshold:
+            return False
+        return True
 
     def criterian50(self):
         pass
