@@ -3,6 +3,7 @@ from source import read, write
 import json
 from frequency import n_gram_frequency
 import numpy as np
+import zipfile
 
 path = os.path.dirname(os.path.abspath(__file__))
 
@@ -67,13 +68,21 @@ class Criterion:
         if (set_size - count) <= threshold:
             return False
         return True
-
+    
+    def structuralCriterian(self, path_to_text: str, threshold: int) -> bool:
+        archive = zipfile.ZipFile(f'{path}/tmp.zip', 'w')
+        archive.write(path_to_text)
+        statinfo = 100 * abs(os.stat(path_to_text).st_size - os.stat(f'{path}/tmp.zip').st_size) / os.stat(path_to_text).st_size
+        print(statinfo)
+        tt = 0
 
 
 def main():
     letters_frequency = json.loads(read(f'{path}/result/letter_frequency.json'))
     bigrams_frequency = json.loads(read(f'{path}/result/bigrams_frequency.json'))
     criterion = Criterion(bigrams_frequency)
+    for i in range(1, 10000):
+        criterion.structuralCriterian(f'{path}/texts/X/L_1000_N_{i}', 0)
 
 if __name__ == '__main__':
     main()
