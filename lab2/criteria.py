@@ -56,8 +56,18 @@ class Criterion:
             return False
         return True
 
-    def criterian50(self):
-        pass
+    def criterian50(self, text: str, set_size: int, threshold: int) -> bool:
+        allowed_n_grams = self.__n_grams[-set_size:]   
+        frequency = n_gram_frequency(text, self.__n_grams_len)
+
+        count = sum([
+            1 if frequency[x] > 0 else 0 
+            for x in allowed_n_grams
+        ])
+        if (set_size - count) <= threshold:
+            return False
+        return True
+
 
 
 def main():
