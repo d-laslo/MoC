@@ -22,7 +22,8 @@ def write_new_texts(text, L, N):
     for i in range(N):
         write(f'{path}/texts/X/L_{L}_N_{i+1}', texts[i])
     
-
+def generate_text_with_one_symbol(symbol,length_of_symbols):
+    return symbol * length_of_symbols
 
 if __name__ == '__main__':
     text = read(f'{path}/texts/format_text')
@@ -32,3 +33,5 @@ if __name__ == '__main__':
     
     write_new_texts(text, L[-1], N[-1])
 
+    # генеруємо і записуємо купу символів "ааааа..." в файл nosense_text
+    write(f'{path}/texts/nosence_text',generate_text_with_one_symbol('a',L[-1]))
