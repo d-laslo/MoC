@@ -20,7 +20,7 @@ def generate_texts(text, text_len, num):
 def write_new_texts(text, L, N):
     texts = generate_texts(text, L, N)
     for i in range(N):
-        write(f'{path}/texts/X/L_{L}_N_{i+1}', texts[i])
+        write(f'{path}/texts/X/L_{L}_N_{i+1}.log', texts[i])
     
 def generate_text_with_one_symbol(symbol,length_of_symbols):
     return symbol * length_of_symbols
