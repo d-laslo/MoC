@@ -12,5 +12,5 @@ def format(text):
 if __name__ == '__main__':
     write(
         f'{path}/texts/{"format_text"}', 
-        ''.join([format(read(f'{path}/texts/{i}')) for i in text_names])
+        ''.join([format(read(f'{path}/texts/raw_texts/{i}')) for i in text_names])
     )
