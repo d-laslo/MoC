@@ -22,17 +22,18 @@ class Criterion:
         text_len = sum(frequency_val)
         return  sum([x * (x-1) for x in frequency_val]) / (text_len * (text_len - 1))
 
-    def criterian20(self, text: str, set_size: int) -> bool:
-        return self.criterian21(self, text, set_size, set_size)
+    def criterian20(self, text: str, set_size: int) -> bool: #10: 1, 100: ~1, 1000: ~30, 10000: 210
+        return self.criterian21(text, set_size, set_size)
 
-    def criterian21(self, text: str, set_size: int, threshold: int) -> bool:
+    def criterian21(self, text: str, set_size: int, threshold: int) -> bool: # 10: <50, 1>, 100: <5, 2>, 1000: <50, 49>, 10000: <210, 210>
         text_n_grams = set(self.__split_into_n_grams(text, self.__n_grams_len))
         allowed_n_grams = set(self.__n_grams[:set_size])
+        tmp = len(text_n_grams & allowed_n_grams)
         if len(text_n_grams & allowed_n_grams) < threshold:
             return False
         return True
 
-    def criterian22(self, text: str, set_size: int, threshold: int) -> bool:
+    def criterian22(self, text: str, set_size: int, threshold: int) -> bool: # 10: <1, 1>, 100: <1, 1>, 1000: <5, 4>, 10000: <30, 40>
         text_n_grams = self.__split_into_n_grams(text, self.__n_grams_len)
         allowed_n_grams = set(self.__n_grams[:set_size])
 
@@ -78,12 +79,14 @@ class Criterion:
         return False
 
 
-def main():
+def main_test():
     letters_frequency = json.loads(read(f'{path}/result/letter_frequency.json'))
     bigrams_frequency = json.loads(read(f'{path}/result/bigrams_frequency.json'))
     criterion = Criterion(bigrams_frequency)
-    for i in range(1, 10000):
-        criterion.structuralCriterian(f'{path}/texts/X/L_1000_N_{i}', 0)
+    res = []
+    for i in range(1, 1001):
+        res.append(criterion.criterian22(read(f'{path}/texts/X/L_10000_N_{i}.log'), 30, 40))
+    print(res.count(True))
 
 if __name__ == '__main__':
-    main()
+    main_test()
