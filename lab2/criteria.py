@@ -79,1867 +79,1882 @@ class Criterion:
         return False
 
 
+def test(result_name, path, N, criteria, *parameters):
+    res = []
+    for n in range(N):
+        res.append(criteria(read(f'{path}{n + 1}'), *parameters))
+    print(f'{result_name}{res.count(True)}')
+
+
 def main_test():
     letters_frequency = json.loads(read(f'{path}/result/letter_frequency.json'))
-    criterion_letters = Criterion(letters_frequency);
+    criterion_letters = Criterion(letters_frequency)
     
     #criterian20
 
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/X/L_10_N_{n}', 1))
-    print(f'criterian20 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/X/L_100_N_{n}', 1))
-    print(f'criterian20 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/X/L_1000_N_{n}', 30))
-    print(f'criterian20 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/X/L_10000_N_{n}', 210))
-    print(f'criterian20 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/affine/L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/affine/L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-
-    #criterian21
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/X/L_10_N_{n}', 50, 1))
-    print(f'criterian21 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/X/L_100_N_{n}', 5, 2))
-    print(f'criterian21 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/X/L_1000_N_{n}', 50, 49))
-    print(f'criterian21 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/X/L_10000_N_{n}', 210, 210))
-    print(f'criterian21 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/affine/L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/affine/L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-    #criterian22
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/X/L_10_N_{n}', 1, 1))
-    print(f'criterian22 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/X/L_100_N_{n}', 1, 1))
-    print(f'criterian22 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/X/L_1000_N_{n}', 5, 4))
-    print(f'criterian22 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/X/L_10000_N_{n}', 30, 40))
-    print(f'criterian22 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/affine/L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/affine/L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-
-    #criterian23
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/X/L_10_N_{n}', 30, 1))
-    print(f'criterian23 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/X/L_100_N_{n}', 7, 4))
-    print(f'criterian23 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/X/L_1000_N_{n}', 20, 150))
-    print(f'criterian23 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/X/L_10000_N_{n}', 20, 1700))
-    print(f'criterian23 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/affine/L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/affine/L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-    #criterian40
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/X/L_10_N_{n}', .03))
-    print(f'criterian40 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/X/L_100_N_{n}', .003))
-    print(f'criterian40 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/X/L_1000_N_{n}', .001))
-    print(f'criterian40 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/X/L_10000_N_{n}', .00035))
-    print(f'criterian40 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/affine/L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/affine/L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/affine/L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/affine/L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/recursive/L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/recursive/L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/uniform/L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/uniform/L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-    #criterian50
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/X/L_10_N_{n}', 500,497))
-    print(f'criterian50 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/X/L_100_N_{n}', 100, 99))
-    print(f'criterian50 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/X/L_1000_N_{n}', 50, 49))
-    print(f'criterian50 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/X/L_10000_N_{n}', 50, 47))
-    print(f'criterian50 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/affine/L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/affine/L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-    # structual
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/X/L_1000_N_{n}', 48))
-    print(f'structual X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/X/L_10000_N_{n}', 66.2))
-    print(f'structual X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 48))
-    print(f'structual Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 48))
-    print(f'structual Y/recursive/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 48))
-    print(f'structual Y/uniform/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 48))
-    print(f'structual Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 48))
-    print(f'structual Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 48))
-    print(f'structual Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-    
-    
-   #=======================================================
-
-    bigrams_frequency = json.loads(read(f'{path}/result/bigrams_frequency.json'))
-    criterion_bigrams = Criterion(bigrams_frequency)
-
-    #criterian20
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/X/L_10_N_{n}', 1))
-    print(f'criterian20 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/X/L_100_N_{n}', 1))
-    print(f'criterian20 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/X/L_1000_N_{n}', 30))
-    print(f'criterian20 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/X/L_10000_N_{n}', 210))
-    print(f'criterian20 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/affine/L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/affine/L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 1))
-    print(f'criterian20 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 30))
-    print(f'criterian20 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 210))
-    print(f'criterian20 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-
-    #criterian21
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/X/L_10_N_{n}', 50, 1))
-    print(f'criterian21 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/X/L_100_N_{n}', 5, 2))
-    print(f'criterian21 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/X/L_1000_N_{n}', 50, 49))
-    print(f'criterian21 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/X/L_10000_N_{n}', 210, 210))
-    print(f'criterian21 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/affine/L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/affine/L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 50, 1))
-    print(f'criterian21 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 5, 2))
-    print(f'criterian21 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian21 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 210, 210))
-    print(f'criterian21 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-    #criterian22
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/X/L_10_N_{n}', 1, 1))
-    print(f'criterian22 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/X/L_100_N_{n}', 1, 1))
-    print(f'criterian22 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/X/L_1000_N_{n}', 5, 4))
-    print(f'criterian22 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/X/L_10000_N_{n}', 30, 40))
-    print(f'criterian22 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/affine/L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/affine/L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 1, 1))
-    print(f'criterian22 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 5, 4))
-    print(f'criterian22 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 30, 40))
-    print(f'criterian22 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-
-    #criterian23
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/X/L_10_N_{n}', 30, 1))
-    print(f'criterian23 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/X/L_100_N_{n}', 7, 4))
-    print(f'criterian23 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/X/L_1000_N_{n}', 20, 150))
-    print(f'criterian23 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/X/L_10000_N_{n}', 20, 1700))
-    print(f'criterian23 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/affine/L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/affine/L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 30, 1))
-    print(f'criterian23 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 7, 4))
-    print(f'criterian23 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 20, 150))
-    print(f'criterian23 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 20, 1700))
-    print(f'criterian23 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-    #criterian40
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/X/L_10_N_{n}', .03))
-    print(f'criterian40 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/X/L_100_N_{n}', .003))
-    print(f'criterian40 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/X/L_1000_N_{n}', .001))
-    print(f'criterian40 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/X/L_10000_N_{n}', .00035))
-    print(f'criterian40 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/affine/L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/affine/L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/affine/L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/affine/L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/recursive/L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/recursive/L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/uniform/L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/uniform/L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', .03))
-    print(f'criterian40 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', .003))
-    print(f'criterian40 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', .001))
-    print(f'criterian40 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', .00035))
-    print(f'criterian40 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-    #criterian50
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/X/L_10_N_{n}', 500,497))
-    print(f'criterian50 X/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/X/L_100_N_{n}', 100, 99))
-    print(f'criterian50 X/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/X/L_1000_N_{n}', 50, 49))
-    print(f'criterian50 X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/X/L_10000_N_{n}', 50, 47))
-    print(f'criterian50 X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/affine/L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/affine/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/affine/L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/affine/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/recursive/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/recursive/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/recursive/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/uniform/L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/uniform/L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/uniform/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/vigenere/KEY_1_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/vigenere/KEY_1_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/vigenere/KEY_5_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/vigenere/KEY_5_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 500, 497))
-    print(f'criterian50 Y/vigenere/KEY_10_L_10: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 100, 99))
-    print(f'criterian50 Y/vigenere/KEY_10_L_100: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 50, 49))
-    print(f'criterian50 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 50, 47))
-    print(f'criterian50 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
-
-    # structual
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/X/L_1000_N_{n}', 48))
-    print(f'structual X/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/X/L_10000_N_{n}', 66.2))
-    print(f'structual X/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 48))
-    print(f'structual Y/affine/L_1000: {res.count(True)}')
-    
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/affine/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 48))
-    print(f'structual Y/recursive/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/recursive/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 48))
-    print(f'structual Y/uniform/L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/uniform/L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 48))
-    print(f'structual Y/vigenere/KEY_1_L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/vigenere/KEY_1_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 48))
-    print(f'structual Y/vigenere/KEY_5_L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/vigenere/KEY_5_L_10000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 10001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 48))
-    print(f'structual Y/vigenere/KEY_10_L_1000: {res.count(True)}')
-
-    res = []
-    for n in range(1, 1001):
-        res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 66.2))
-    print(f'structual Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+    test('criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 100, criterion_letters.criterian20, 1)
+
+    test('criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 100, criterion_letters.criterian20, 1)
+
+    test('criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 100, criterion_letters.criterian20, 30)
+
+    test('criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion_letters.criterian20, 30)
+
+
+    test('criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion_letters.criterian21, 50, 2)
+
+
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(read(f'{path}/texts/X/L_100_N_{n}'), 1))
+#     print(f'criterian20 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(read(f'{path}/texts/X/L_1000_N_{n}'), 30))
+#     print(f'criterian20 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian20(read(f'{path}/texts/X/L_10000_N_{n}'), 210))
+#     print(f'criterian20 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/affine/L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/affine/L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+
+#     #criterian21
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/X/L_10_N_{n}', 50, 1))
+#     print(f'criterian21 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/X/L_100_N_{n}', 5, 2))
+#     print(f'criterian21 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/X/L_1000_N_{n}', 50, 49))
+#     print(f'criterian21 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/X/L_10000_N_{n}', 210, 210))
+#     print(f'criterian21 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/affine/L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/affine/L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+#     #criterian22
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/X/L_10_N_{n}', 1, 1))
+#     print(f'criterian22 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/X/L_100_N_{n}', 1, 1))
+#     print(f'criterian22 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/X/L_1000_N_{n}', 5, 4))
+#     print(f'criterian22 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/X/L_10000_N_{n}', 30, 40))
+#     print(f'criterian22 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/affine/L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/affine/L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+
+#     #criterian23
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/X/L_10_N_{n}', 30, 1))
+#     print(f'criterian23 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/X/L_100_N_{n}', 7, 4))
+#     print(f'criterian23 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/X/L_1000_N_{n}', 20, 150))
+#     print(f'criterian23 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/X/L_10000_N_{n}', 20, 1700))
+#     print(f'criterian23 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/affine/L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/affine/L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+#     #criterian40
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/X/L_10_N_{n}', .03))
+#     print(f'criterian40 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/X/L_100_N_{n}', .003))
+#     print(f'criterian40 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/X/L_1000_N_{n}', .001))
+#     print(f'criterian40 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/X/L_10000_N_{n}', .00035))
+#     print(f'criterian40 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/affine/L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/affine/L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/affine/L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/affine/L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/recursive/L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/recursive/L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/uniform/L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/uniform/L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+#     #criterian50
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/X/L_10_N_{n}', 500,497))
+#     print(f'criterian50 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/X/L_100_N_{n}', 100, 99))
+#     print(f'criterian50 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/X/L_1000_N_{n}', 50, 49))
+#     print(f'criterian50 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/X/L_10000_N_{n}', 50, 47))
+#     print(f'criterian50 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/affine/L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/affine/L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+#     # structual
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/X/L_1000_N_{n}', 48))
+#     print(f'structual X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/X/L_10000_N_{n}', 66.2))
+#     print(f'structual X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 48))
+#     print(f'structual Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 48))
+#     print(f'structual Y/recursive/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 48))
+#     print(f'structual Y/uniform/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 48))
+#     print(f'structual Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 48))
+#     print(f'structual Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 48))
+#     print(f'structual Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_letters.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+    
+    
+#    #=======================================================
+
+#     bigrams_frequency = json.loads(read(f'{path}/result/bigrams_frequency.json'))
+#     criterion_bigrams = Criterion(bigrams_frequency)
+
+#     #criterian20
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/X/L_10_N_{n}', 1))
+#     print(f'criterian20 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/X/L_100_N_{n}', 1))
+#     print(f'criterian20 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/X/L_1000_N_{n}', 30))
+#     print(f'criterian20 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/X/L_10000_N_{n}', 210))
+#     print(f'criterian20 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/affine/L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/affine/L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 1))
+#     print(f'criterian20 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 30))
+#     print(f'criterian20 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian20(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 210))
+#     print(f'criterian20 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+
+#     #criterian21
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/X/L_10_N_{n}', 50, 1))
+#     print(f'criterian21 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/X/L_100_N_{n}', 5, 2))
+#     print(f'criterian21 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/X/L_1000_N_{n}', 50, 49))
+#     print(f'criterian21 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/X/L_10000_N_{n}', 210, 210))
+#     print(f'criterian21 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/affine/L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/affine/L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 50, 1))
+#     print(f'criterian21 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 5, 2))
+#     print(f'criterian21 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian21 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian21(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 210, 210))
+#     print(f'criterian21 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+#     #criterian22
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/X/L_10_N_{n}', 1, 1))
+#     print(f'criterian22 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/X/L_100_N_{n}', 1, 1))
+#     print(f'criterian22 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/X/L_1000_N_{n}', 5, 4))
+#     print(f'criterian22 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/X/L_10000_N_{n}', 30, 40))
+#     print(f'criterian22 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/affine/L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/affine/L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 1, 1))
+#     print(f'criterian22 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 5, 4))
+#     print(f'criterian22 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian22(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 30, 40))
+#     print(f'criterian22 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+
+#     #criterian23
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/X/L_10_N_{n}', 30, 1))
+#     print(f'criterian23 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/X/L_100_N_{n}', 7, 4))
+#     print(f'criterian23 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/X/L_1000_N_{n}', 20, 150))
+#     print(f'criterian23 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/X/L_10000_N_{n}', 20, 1700))
+#     print(f'criterian23 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/affine/L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/affine/L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 30, 1))
+#     print(f'criterian23 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 7, 4))
+#     print(f'criterian23 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 20, 150))
+#     print(f'criterian23 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian23(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 20, 1700))
+#     print(f'criterian23 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+#     #criterian40
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/X/L_10_N_{n}', .03))
+#     print(f'criterian40 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/X/L_100_N_{n}', .003))
+#     print(f'criterian40 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/X/L_1000_N_{n}', .001))
+#     print(f'criterian40 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/X/L_10000_N_{n}', .00035))
+#     print(f'criterian40 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/affine/L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/affine/L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/affine/L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/affine/L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/recursive/L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/recursive/L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/uniform/L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/uniform/L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', .03))
+#     print(f'criterian40 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', .003))
+#     print(f'criterian40 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', .001))
+#     print(f'criterian40 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian40(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', .00035))
+#     print(f'criterian40 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+#     #criterian50
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/X/L_10_N_{n}', 500,497))
+#     print(f'criterian50 X/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/X/L_100_N_{n}', 100, 99))
+#     print(f'criterian50 X/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/X/L_1000_N_{n}', 50, 49))
+#     print(f'criterian50 X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/X/L_10000_N_{n}', 50, 47))
+#     print(f'criterian50 X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/affine/L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/affine/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/affine/L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/affine/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/recursive/L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/recursive/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/recursive/L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/recursive/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/recursive/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/uniform/L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/uniform/L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/uniform/L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/uniform/L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/uniform/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/vigenere/KEY_1_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/vigenere/KEY_1_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/vigenere/KEY_5_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/vigenere/KEY_5_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_10_N_{n}.log', 500, 497))
+#     print(f'criterian50 Y/vigenere/KEY_10_L_10: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_100_N_{n}.log', 100, 99))
+#     print(f'criterian50 Y/vigenere/KEY_10_L_100: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 50, 49))
+#     print(f'criterian50 Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.criterian50(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 50, 47))
+#     print(f'criterian50 Y/vigenere/KEY_10_L_10000: {res.count(True)}')
+
+#     # structual
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/X/L_1000_N_{n}', 48))
+#     print(f'structual X/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/X/L_10000_N_{n}', 66.2))
+#     print(f'structual X/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/affine/L_1000_N_{n}.log', 48))
+#     print(f'structual Y/affine/L_1000: {res.count(True)}')
+    
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/affine/L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/affine/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/recursive/L_1000_N_{n}.log', 48))
+#     print(f'structual Y/recursive/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/recursive/L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/recursive/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/uniform/L_1000_N_{n}.log', 48))
+#     print(f'structual Y/uniform/L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/uniform/L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/uniform/L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_{n}.log', 48))
+#     print(f'structual Y/vigenere/KEY_1_L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/vigenere/KEY_1_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_{n}.log', 48))
+#     print(f'structual Y/vigenere/KEY_5_L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/vigenere/KEY_5_L_10000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 10001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_{n}.log', 48))
+#     print(f'structual Y/vigenere/KEY_10_L_1000: {res.count(True)}')
+
+#     res = []
+#     for n in range(1, 1001):
+#         res.append(criterion_bigrams.structuralCriterian(f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_{n}.log', 66.2))
+#     print(f'structual Y/vigenere/KEY_10_L_10000: {res.count(True)}')
 
 if __name__ == '__main__':
     main_test()
