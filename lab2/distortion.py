@@ -90,15 +90,15 @@ def main():
         text_L1000 = read(f'{path}/texts/X/L_1000_N_{n+1}')
         for key in keys:
             keylen = len(key)
-            write(f'{path}/texts/Y/vigenere/KEY_{keylen}_L_10_N_{n+1}.log',dis.vigenereCipher(text_L10,key))
-            write(f'{path}/texts/Y/vigenere/KEY_{keylen}_L_100_N_{n+1}.log',dis.vigenereCipher(text_L100,key))
-            write(f'{path}/texts/Y/vigenere/KEY_{keylen}_L_1000_N_{n+1}.log',dis.vigenereCipher(text_L1000,key))
+            write(f'{path}/texts/Y/vigenere/KEY_{keylen}_L_10_N_{n+1}',dis.vigenereCipher(text_L10,key))
+            write(f'{path}/texts/Y/vigenere/KEY_{keylen}_L_100_N_{n+1}',dis.vigenereCipher(text_L100,key))
+            write(f'{path}/texts/Y/vigenere/KEY_{keylen}_L_1000_N_{n+1}',dis.vigenereCipher(text_L1000,key))
 
     for n in range(N[1]):
         text_L10000 = read(f'{path}/texts/X/L_10000_N_{n+1}')
         for key in keys:
             keylen = len(key)
-            write(f'{path}/texts/Y/vigenere/KEY_{keylen}_L_10000_N_{n+1}.log',dis.vigenereCipher(text_L10000,key))
+            write(f'{path}/texts/Y/vigenere/KEY_{keylen}_L_10000_N_{n+1}',dis.vigenereCipher(text_L10000,key))
 
     #Affine distortion
     a = randint(0,len(letters)-1)
@@ -108,33 +108,33 @@ def main():
         text_L100 = read(f'{path}/texts/X/L_100_N_{n+1}')
         text_L1000 = read(f'{path}/texts/X/L_1000_N_{n+1}')
         #print(dis.affinePermutation("текс",4,5))
-        write(f'{path}/texts/Y/affine/L_10_N_{n+1}.log',dis.affinePermutation(text_L10,a,b))
-        write(f'{path}/texts/Y/affine/L_100_N_{n+1}.log',dis.affinePermutation(text_L100,a,b))
-        write(f'{path}/texts/Y/affine/L_1000_N_{n+1}.log',dis.affinePermutation(text_L1000,a,b))
+        write(f'{path}/texts/Y/affine/L_10_N_{n+1}',dis.affinePermutation(text_L10,a,b))
+        write(f'{path}/texts/Y/affine/L_100_N_{n+1}',dis.affinePermutation(text_L100,a,b))
+        write(f'{path}/texts/Y/affine/L_1000_N_{n+1}',dis.affinePermutation(text_L1000,a,b))
 
     for n in range(N[1]):
         text_L10000 = read(f'{path}/texts/X/L_10000_N_{n+1}')
-        write(f'{path}/texts/Y/affine/L_10000_N_{n+1}.log',dis.affinePermutation(text_L10000,a,b))
+        write(f'{path}/texts/Y/affine/L_10000_N_{n+1}',dis.affinePermutation(text_L10000,a,b))
 
     #Uniform distortion
     for n in range(N[0]):
-        write(f'{path}/texts/Y/uniform/L_10_N_{n+1}.log',dis.uniformlyDistributedSequence(10))
-        write(f'{path}/texts/Y/uniform/L_100_N_{n+1}.log',dis.uniformlyDistributedSequence(100))
-        write(f'{path}/texts/Y/uniform/L_1000_N_{n+1}.log',dis.uniformlyDistributedSequence(1000))
+        write(f'{path}/texts/Y/uniform/L_10_N_{n+1}',dis.uniformlyDistributedSequence(10))
+        write(f'{path}/texts/Y/uniform/L_100_N_{n+1}',dis.uniformlyDistributedSequence(100))
+        write(f'{path}/texts/Y/uniform/L_1000_N_{n+1}',dis.uniformlyDistributedSequence(1000))
     
     for n in range(N[1]):
-        write(f'{path}/texts/Y/uniform/L_10000_N_{n+1}.log',dis.uniformlyDistributedSequence(10000))
+        write(f'{path}/texts/Y/uniform/L_10000_N_{n+1}',dis.uniformlyDistributedSequence(10000))
 
 
     #Recursive distortion
     for n in range(N[0]):
-        write(f'{path}/texts/Y/recursive/L_10_N_{n+1}.log',dis.recursiveSequence(10))
-        write(f'{path}/texts/Y/recursive/L_100_N_{n+1}.log',dis.recursiveSequence(100))
-        write(f'{path}/texts/Y/recursive/L_1000_N_{n+1}.log',dis.recursiveSequence(1000))
+        write(f'{path}/texts/Y/recursive/L_10_N_{n+1}',dis.recursiveSequence(10))
+        write(f'{path}/texts/Y/recursive/L_100_N_{n+1}',dis.recursiveSequence(100))
+        write(f'{path}/texts/Y/recursive/L_1000_N_{n+1}',dis.recursiveSequence(1000))
 
     for n in range(N[1]):
         text_L10000 = read(f'{path}/texts/X/L_10000_N_{n+1}')
-        write(f'{path}/texts/Y/recursive/L_10000_N_{n+1}.log',dis.recursiveSequence(10000))
+        write(f'{path}/texts/Y/recursive/L_10000_N_{n+1}',dis.recursiveSequence(10000))
 
 
 if __name__ == '__main__':
