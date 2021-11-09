@@ -97,14 +97,18 @@ def testStructural(result_name, path, N, criteria, *parameters):
     print(f'{result_name}{res.count(True)}')
 
 def letter_affine(criterian_name, criterian):
-    test(f'{criterian_name} X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterian, 1)
-    test(f'{criterian_name} X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterian, 1)
-    test(f'{criterian_name} X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterian, 30)
-    test(f'{criterian_name} X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterian, 30)
-    test(f'{criterian_name} Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterian, 1)
-    test(f'{criterian_name} Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterian, 1)
-    test(f'{criterian_name} Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterian, 30)
-    test(f'{criterian_name} Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterian, 30)
+    p_L10 = 1
+    p_L100 = 1
+    p_L1000 = 30
+    P_L10000 = 30
+    test(f'{criterian_name} X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterian, p_L10)
+    test(f'{criterian_name} X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterian, p_L100)
+    test(f'{criterian_name} X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterian, p_L1000)
+    test(f'{criterian_name} X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterian, P_L10000)
+    test(f'{criterian_name} Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterian, p_L10)
+    test(f'{criterian_name} Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterian, p_L100)
+    test(f'{criterian_name} Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterian, p_L1000)
+    test(f'{criterian_name} Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterian, P_L10000)
 
 
 def main_test():
