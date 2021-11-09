@@ -96,6 +96,16 @@ def testStructural(result_name, path, N, criteria, *parameters):
         res.append(criteria(f'{path}{n + 1}', *parameters))
     print(f'{result_name}{res.count(True)}')
 
+def letter_affine(criterian_name, criterian):
+    test(f'{criterian_name} X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterian, 1)
+    test(f'{criterian_name} X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterian, 1)
+    test(f'{criterian_name} X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterian, 30)
+    test(f'{criterian_name} X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterian, 30)
+    test(f'{criterian_name} Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterian, 1)
+    test(f'{criterian_name} Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterian, 1)
+    test(f'{criterian_name} Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterian, 30)
+    test(f'{criterian_name} Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterian, 30)
+
 
 def main_test():
     letters_frequency = json.loads(read(f'{path}/result/letter_frequency.json'))
@@ -103,6 +113,9 @@ def main_test():
     print("letter")
 
     #criterian20
+
+    letter_affine('criterian20', criterion_letters.criterian20)
+
 
     test('criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion_letters.criterian20, 1)
     test('criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion_letters.criterian20, 1)
