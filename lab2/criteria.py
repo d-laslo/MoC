@@ -89,1681 +89,2014 @@ def testTrue(result_name, path, N, criteria, *parameters):
     res = []
     for n in range(N):
         res.append(criteria(read(f'{path}{n + 1}'), *parameters))
-    print(f'{result_name}{res.count(True)}                         {res.count(True)}/10000 = {res.count(True)/10000}')
+    return res.count(True) / N
+    # print(f'{result_name}{res.count(True)}                         {res.count(True)}/10000 = {res.count(True)/10000}')
 
 def testFalse(result_name, path, N, criteria, *parameters):
     res = []
     for n in range(N):
         res.append(criteria(read(f'{path}{n + 1}'), *parameters))
-    print(f'{result_name}{res.count(False)}                        {res.count(False)}/10000 = {res.count(False)/10000}')
+    return res.count(False)/ N
+    # print(f'{result_name}{res.count(False)}                        {res.count(False)}/10000 = {res.count(False)/10000}')
 
 def testTrueStructural(result_name, path, N, criteria, *parameters):
     res = []
     for n in range(N):
         res.append(criteria(f'{path}{n + 1}', *parameters))
-    print(f'{result_name}{res.count(True)}                         {res.count(True)}/10000 = {res.count(True)/10000}')
+    return res.count(True) / N
+    #print(f'{result_name}{res.count(True)}                         {res.count(True)}/10000 = {res.count(True)/10000}')
 
 def testFalseStructural(result_name, path, N, criteria, *parameters):
     res = []
     for n in range(N):
         res.append(criteria(f'{path}{n + 1}', *parameters))
-    print(f'{result_name}{res.count(False)}                        {res.count(False)}/10000 = {res.count(False)/10000}')
+    return res.count(False)/ N
+    #print(f'{result_name}{res.count(False)}                        {res.count(False)}/10000 = {res.count(False)/10000}')
 
-def letter_affine_L10(criterion):
+
+def output(criteria, size_l1, p_l1, size_l2, p_l2, fp_l1, fn_l1, fp_l2, fn_l2):
+    #&2.1 () &0.0245 & 0.5208 & 0.1167 & 0.0096
+    if size_l1 == '' or size_l2 == '':
+        print(f'{criteria} ({p_l1}; {p_l2}) & {fp_l1} & {fn_l1} & {fp_l2} & {fn_l2}')
+    else:
+        print(f'{criteria} ({size_l1},{p_l1}; {size_l2}, {p_l2}) & {fp_l1} & {fn_l1} & {fp_l2} & {fn_l2}')
+
+def affine_L10(letter_criterion,bigram_criterion):
+    print("affine_L10:")
+
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian20, p)
-
-    size = 4
-    p = 1
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 1
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 3
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian23, size, p)
-
-    p = .03
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 16
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian50, size, p)
-
-    p = 1015
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.structuralCriterian, p)
-   
-def letter_affine_L100(criterion):
-    p = 1
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian20, p)
-
-    size = 1
-    p = 1
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian21, size, p)
-
-    size = 5
-    p = 1
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian22, size, p)
-
-    size = 1
-    p = 2
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian23, size, p)
-
-    p = 0.02
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian40, p)
-    
-    size = 100
-    p = 71
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian50, size, p)
-
-    p = 57.5
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/affine/L_100_N_: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.structuralCriterian, p)
-   
-def letter_affine_L1000(criterion):
-    p = 3
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian20, p)
-
-    size = 3
-    p = 3
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian21, size, p)
-
-    size = 5
-    p = 30
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian22, size, p)
-
-    size = 5
-    p = 340
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian23, size, p)
-
-    p = 0.005
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian40, p)
-    
-    size = 1000
-    p = 967 #problem
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian50, size, p)
-
-    p = 49.0
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_affine_L10000(criterion):
-    p = 3
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian20, p)
-
-    size = 100
-    p = 32
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian21, size, p)
-
-    size = 100
-    p = 30
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian22, size, p)
-
-    size = 10
-    p = 6000
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian23, size, p)
-
-    p = 0.0005
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian40, p)
-    
-    size = 100
-    p = 67 #problem
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian50, size, p)
-
-    p = 66
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.structuralCriterian, p)
-
-def letter_recursive_L10(criterion):
-    p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian20, p)
-
-    size = 5
-    p = 2
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 1
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 4
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian23, size, p)
-
-    p = .03
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 16
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian50, size, p)
-
-    p = 1015
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_recursive_L100(criterion):
-    p = 3
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian20, p)
-
-    size = 10
-    p = 8
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian21, size, p)
-
-    size = 5
-    p = 1
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian22, size, p)
-
-    size = 3
-    p = 17
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian23, size, p)
-
-    p = 0.005
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian40, p)
-    
-    size = 10
-    p = 4
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian50, size, p)
-
-    p = 58
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/recursive/L_100_N_: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_recursive_L1000(criterion):
-    p = 3
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian20, p)
-
-    size = 10
-    p = 8
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian21, size, p)
-
-    size = 5
-    p = 1
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian22, size, p)
-
-    size = 3
-    p = 190
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian23, size, p)
-
-    p = 0.005
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian40, p)
-    
-    size = 100
-    p = 68 #promlem
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian50, size, p)
-
-    p = 49
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/recursive/L_1000_N_: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_recursive_L10000(criterion):
-    p = 3
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian20, p)
-
-    size = 100
-    p = 32
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian21, size, p)
-
-    size = 10
-    p = 350
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian22, size, p)
-
-    size = 10
-    p = 5900
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian23, size, p)
-
-    p = 0.001
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian40, p)
-    
-    size = 200
-    p = 167 #problem
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian50, size, p)
-
-    p = 66 #problem
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.structuralCriterian, p)
-
-def letter_uniform_L10(criterion):
-    p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 3
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 1
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 4
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian23, size, p)
-
-    p = .028
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 16
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian50, size, p)
-
-    p = 1015 #problem
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_uniform_L100(criterion):
-    p = 18
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian20, p)
-
-    size = 20
-    p = 19
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian21, size, p)
-
-    size = 5
-    p = 3
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian22, size, p)
-
-    size = 5
-    p = 20
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian23, size, p)
-
-    p = .01
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 3
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian50, size, p)
-
-    p = 60 #problem
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_uniform_L1000(criterion):
-    p = 18
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian20, p)
-
-    size = 20
-    p = 20
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian21, size, p)
-
-    size = 5
-    p = 32
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian22, size, p)
-
-    size = 5
-    p = 200
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian23, size, p)
-
-    p = .01
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian40, p)
-    
-    size = 500
-    p = 467 #problem
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian50, size, p)
-
-    p = 47.5
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_uniform_L10000(criterion):
-    p = 18
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian20, p)
-
-    size = 20
-    p = 20
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian21, size, p)
-
-    size = 5
-    p = 550
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian22, size, p)
-
-    size = 5
-    p = 3600
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian23, size, p)
-
-    p = .01
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian40, p)
-    
-    size = 500
-    p = 467 #problem
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian50, size, p)
-
-    p = 54.7
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L10_K_1(criterion):
-    p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 3
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 1
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 4
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian23, size, p)
-
-    p = .03
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 16
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian50, size, p)
-
-    p = 1015 #problem
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L100_K_1(criterion):
-    p = 10
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 7
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 6
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian23, size, p)
-
-    p = .004
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 4
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian50, size, p)
-
-    p = 60 
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L1000_K_1(criterion):
-    p = 4
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 7
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 6
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian23, size, p)
-
-    p = .006
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian40, p)
-    
-    size = 100
-    p = 66
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian50, size, p)
-
-    p = 47 #problem
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L10000_K_1(criterion):
-    p = 4
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian20, p)
-
-    size = 7
-    p = 7
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 6
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian23, size, p)
-
-    p = .006
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian40, p)
-    
-    size = 100
-    p = 66
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian50, size, p)
-
-    p = 47 #problem
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L10_K_5(criterion):
-    p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 3
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 1
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 4
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian23, size, p)
-
-    p = .03
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 16
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian50, size, p)
-
-    p = 1015 #problem
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L100_K_5(criterion):
-    p = 12
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian20, p)
-
-    size = 5
-    p = 5
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian21, size, p)
-
-    size = 5
-    p = 2
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian23, size, p)
-
-    p = .01
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 3
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian50, size, p)
-
-    p = 60 #problem
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L1000_K_5(criterion):
-    p = 4
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 7
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 6
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian23, size, p)
-
-    p = .02
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian40, p)
-    
-    size = 100
-    p = 66
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian50, size, p)
-
-    p = 46 
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L10000_K_5(criterion):
-    p = 4
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian20, p)
-
-    size = 7
-    p = 7
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 6
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian23, size, p)
-
-    p = .01
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian40, p)
-    
-    size = 100
-    p = 66
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian50, size, p)
-
-    p = 47 #problem
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L10_K_10(criterion):
-    p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 3
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 1
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 4
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian23, size, p)
-
-    p = .03
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 16
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian50, size, p)
-
-    p = 1015 #problem
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L100_K_10(criterion):
-    p = 10
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 7
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 6
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian23, size, p)
-
-    p = .01
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian40, p)
-    
-    size = 20
-    p = 3
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian50, size, p)
-
-    p = 59
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L1000_K_10(criterion):
-    p = 4
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian20, p)
-
-    size = 7
-    p = 7
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 6
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian23, size, p)
-
-    p = .01
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian40, p)
-    
-    size = 100
-    p = 66
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian50, size, p)
-
-    p = 47 #problem
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.structuralCriterian, p)
-
-def letter_vigenere_L10000_K_10(criterion):
-    p = 4
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian20, p)
-
-    size = 7
-    p = 7
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian21, size, p)
-
-    size = 1
-    p = 6
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian22, size, p)
-
-    size = 7
-    p = 36
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian23, size, p)
-
-    p = .005 #problem
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian40, p)
-    
-    size = 100
-    p = 66
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian50, size, p)
-
-    p = 47 
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.structuralCriterian, p)
-
-def bigram_affine_L10(criterion):
-    p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 4
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 50
     p = 2
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
 
-    size = 7
-    p = 0
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian22, size, p)
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+
+    size = 1
+    p = 1
+    fp_l2 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 10
     p = 1
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .03
+    fp_l1 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
 
     p = .02
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian40, p)
-    
+    fp_l2 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, bigram_criterion.criterian40, p)
+
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 16
+    fp_l1 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 200
     p = 199
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/affine/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 1015
+    fp_l1 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 1009
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, criterion.structuralCriterian, p)
-   
-def bigram_affine_L100(criterion):
+    fp_l2 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/L_10: ', f'{path}/texts/Y/affine/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
+
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def affine_L100(letter_criterion,bigram_criterion):
+    print("affine L100:")
+
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    
+    size = 1
+    p = 1
+    fp_l2 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    
+    size = 1
+    p = 1
+    fp_l2 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 2
+    fp_l1 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 1
     p = 1
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+    
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
 
-    size = 7
-    p = 0
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian22, size, p)
-
-    size = 1
-    p = 1
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian23, size, p)
-
+    p_l1 = 0.02
+    fp_l1 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
+    
     p = 0.001
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian40, p)
+    fp_l2 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 71
+    fp_l1 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
     
     size = 100
     p = 99
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/affine/L_100: ', f'{path}/texts/Y/affine/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 57.5
+    fp_l1 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/affine/L_100_N_: ', f'{path}/texts/Y/affine/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 59
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/affine/L_100_N_: ', f'{path}/texts/Y/affine/L_100_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/affine/L_100_N_: ', f'{path}/texts/Y/affine/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
    
-def bigram_affine_L1000(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def affine_L1000(letter_criterion,bigram_criterion):
+    print("affine L1000:")
+
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 3
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 3
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 3
     p = 3
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 30
+    fp_l1 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 5
     p = 3
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 340
+    fp_l1 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 5
     p = 5
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 0.005
+    fp_l1 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
 
     p = 0.005
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian40, p)
-    
+    fp_l2 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1000
+    p_l1 = 967 #problem
+    fp_l1 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 500
     p = 450 #problem:to slow 
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 49.0
+    fp_l1 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 48
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, criterion.structuralCriterian, p)
+    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
+    testTrueStructural('structural Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_affine_L10000(criterion):
+def affine_L10000(letter_criterion,bigram_criterion):
+    print("affine L1000:")
+
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+
     p = 3
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 32
+    fp_l1 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 100
     p = 32
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 30
+    fp_l1 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 100
     p = 15
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 10
+    p_l1 = 6000
+    fp_l1 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 10
     p = 290
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
 
-    p = 0.0005
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 0.0005
+    fp_l1 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
     
+    p = 0.0005
+    fp_l2 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 67 #problem
+    fp_l1 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 96 
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 66
+    fp_l1 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
 
     p = 66
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/affine/L_10000: ', f'{path}/texts/Y/affine/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
 
-def bigram_recursive_L10(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def recursive_L10(letter_criterion,bigram_criterion):
+    print("recursive L10:")
+
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 2
+    fp_l1 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 50
     p = 2
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 0   
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 15
     p = 1
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .03
+    fp_l1 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
 
     p = .005
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian40, p)
-    
+    fp_l2 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, bigram_criterion.criterian40, p)
+
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 16
+    fp_l1 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 200
     p = 199
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 1015
+    fp_l1 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 1000
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, criterion.structuralCriterian, p)
-    
-def bigram_recursive_L100(criterion):
+    fp_l2 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = fp_l1 = testTrueStructural('structural Y/recursive/L_10: ', f'{path}/texts/Y/recursive/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
+
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def recursive_L100(letter_criterion,bigram_criterion):
+    print("recursive L100:")
+
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 10
+    p_l1 = 8
+    fp_l1 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 10
     p = 1
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 1
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 3
+    p_l1 = 17
+    fp_l1 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 3
     p = 1
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 0.005
+    fp_l1 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
 
     p = 0.005
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian40, p)
-    
+    fp_l2 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, bigram_criterion.criterian40, p)
+
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 10
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 50
     p = 49
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/recursive/L_100: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
 
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 58
+    fp_l1 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/recursive/L_100_N_: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    
     p = 58
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/recursive/L_100_N_: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/recursive/L_100_N_: ', f'{path}/texts/Y/recursive/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_recursive_L1000(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def recursive_L1000(letter_criterion,bigram_criterion):
+    print("recirsive L1000")
+
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 3
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 10
+    p_l1 = 8
+    fp_l1 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 10
     p = 8
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 5
     p = 1
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 3
+    p_l1 = 190
+    fp_l1 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 50
     p = 210
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 0.005
+    fp_l1 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
 
     p = 0.005
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian40, p)
-    
+    fp_l2 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 68 #promlem
+    fp_l1 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 98 #promlem
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/recursive/L_1000: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 49
+    fp_l1 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/recursive/L_1000_N_: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 47 #problem
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/recursive/L_1000_N_: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/recursive/L_1000_N_: ', f'{path}/texts/Y/recursive/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_recursive_L10000(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def recursive_L10000(letter_criterion,bigram_criterion):
+    print("recirsive L10000:")
+
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+
     p = 3
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 32
+    fp_l1 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 100
     p = 32
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 10
+    p_l1 = 350
+    fp_l1 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 100
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 10
+    p_l1 = 5900
+    fp_l1 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 10
     p = 1000
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 0.001
+    fp_l1 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
 
     p = 0.001
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian40, p)
-    
+    fp_l2 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 200
+    p_l1 = 167 #problem
+    fp_l1 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 200
     p = 180 #problem 180,
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 66 #problem
+    fp_l1 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
 
     p = 66 #problem
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/recursive/L_10000: ', f'{path}/texts/Y/recursive/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
 
-def bigram_uniform_L10(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def uniform_L10(letter_criterion,bigram_criterion):
+    print("recirsive L10000:")
+
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 0
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 10
     p = 1
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 0
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 1
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .028
+    fp_l1 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
 
     p = .0044
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian40, p)
+    fp_l2 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, bigram_criterion.criterian40, p)
     
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 16
+    fp_l1 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 20
     p = 19
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 1015 #problem
+    fp_l1 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 1015 #problem
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/uniform/L_10: ', f'{path}/texts/Y/uniform/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_uniform_L100(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def uniform_L100(letter_criterion,bigram_criterion):
+    print("uniform_L100:")
+
+    p_l1 = 18
+    fp_l1 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 19
+    fp_l1 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 20
     p = 6
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 1
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 20
+    fp_l1 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 5
     p = 2
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .01
+    fp_l1 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
 
     p = .0025
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian40, p)
+    fp_l2 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, bigram_criterion.criterian40, p)
     
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 20
     p = 19
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 60 #problem
+    fp_l1 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 59 #problem
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/uniform/L_100: ', f'{path}/texts/Y/uniform/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_uniform_L1000(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def uniform_L1000(letter_criterion,bigram_criterion):
+    print("uniform_L1000:")
+
+    p_l1 = 18
+    fp_l1 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 18
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 20
+    fp_l1 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 20
     p = 20
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 32
+    fp_l1 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 5
     p = 3
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 200
+    fp_l1 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 5
     p = 15
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .003
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .01
+    fp_l1 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .003
+    fp_l2 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 500
+    p_l1 = 467 #problem
+    fp_l1 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 500
     p = 210 #problem 470
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 47.5
+    fp_l1 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 47.5
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/uniform/L_1000: ', f'{path}/texts/Y/uniform/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_uniform_L10000(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+
+def uniform_L10000(letter_criterion,bigram_criterion):
+    print("uniform_L10000:")
+
+    p_l1 = 18
+    fp_l1 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+
     p = 16
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 20
+    fp_l1 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 200
     p = 192
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 550
+    fp_l1 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 5
     p = 12
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 3600
+    fp_l1 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 5
     p = 70
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
 
-    p = .003
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .01
+    fp_l1 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
     
+    p = .003
+    fp_l2 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 500
+    p_l1 = 467 #problem
+    fp_l1 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 500
     p = 29 #problem 280
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 54.7
+    fp_l1 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
 
     p = 54.7
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/uniform/L_10000: ', f'{path}/texts/Y/uniform/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L10_K_1(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L10_K1(letter_criterion,bigram_criterion):
+    print("vigenere_L10_K1:")
+
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 0
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 10
     p = 1
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 0
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 100
     p = 3
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .005
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .03
+    fp_l1 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .005
+    fp_l2 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 16
+    fp_l1 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 99
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 1015 #problem
+    fp_l1 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 1015 
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_1_L_10: ', f'{path}/texts/Y/vigenere/KEY_1_L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L100_K_1(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L100_K_1(letter_criterion,bigram_criterion):
+    print("vigenere_L100_K_1:")
+
+    p_l1 = 10
+    fp_l1 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 7
+    fp_l1 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 7
     p = 3
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 6
+    fp_l1 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 1
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 4
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .002
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .004
+    fp_l1 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .002
+    fp_l2 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 20
     p = 19
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 60 
+    fp_l1 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 59 
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_1_L_100: ', f'{path}/texts/Y/vigenere/KEY_1_L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L1000_K_1(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L1000_K_1(letter_criterion,bigram_criterion):
+    print("vigenere_L1000_K_1:")
+
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 4
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 7
+    fp_l1 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 7
     p = 7
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 6
+    fp_l1 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 6
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 36
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .002
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .006
+    fp_l1 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .002
+    fp_l2 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 66
+    fp_l1 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 99
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 47 #problem
+    fp_l1 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 47 #problem
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_1_L_1000: ', f'{path}/texts/Y/vigenere/KEY_1_L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L10000_K_1(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L10000_K_1(letter_criterion,bigram_criterion):
+    print("vigenere_L10000_K_1:")
+
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+
     p = 4
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 7
+    fp_l1 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 7
     p = 6
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 6
+    fp_l1 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 20
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 150
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
 
-    p = .006
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .006
+    fp_l1 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
     
+    p = .006
+    fp_l2 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 66
+    fp_l1 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 66
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
 
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 47 #problem
+    fp_l1 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
+    
     p = 66 #problem
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_1_L_10000: ', f'{path}/texts/Y/vigenere/KEY_1_L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L10_K_5(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L10_K_5(letter_criterion,bigram_criterion):
+    print("vigenere_L10_K_5")
+
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 0
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 100
     p = 1
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 0
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 20
     p = 1
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .03
+    fp_l1 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, letter_criterion.criterian40, p_l1)
 
     p = .03
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian40, p)
+    fp_l2 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, bigram_criterion.criterian40, p)
     
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 16
+    fp_l1 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 20
     p = 16
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 1015 #problem
+    fp_l1 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 1015 #problem
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_5_L_10: ', f'{path}/texts/Y/vigenere/KEY_5_L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L100_K_5(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L100_K_5(letter_criterion,bigram_criterion):
+    print("vigenere_L100_K_5")
+
+    p_l1 = 12
+    fp_l1 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 5
+    fp_l1 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 15
     p = 5
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 5
+    p_l1 = 2
+    fp_l1 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 5
     p = 0
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 1
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .005
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .01
+    fp_l1 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .005
+    fp_l2 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 20
     p = 19
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 60 #problem
+    fp_l1 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 60 #problem
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_5_L_100: ', f'{path}/texts/Y/vigenere/KEY_5_L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L1000_K_5(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L1000_K_5(letter_criterion,bigram_criterion):
+    print("vigenere_L1000_K_5:")
+
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 4
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 7
+    fp_l1 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 7
     p = 7
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 6
+    fp_l1 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 6
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 36
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .002
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .02
+    fp_l1 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .002
+    fp_l2 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 66
+    fp_l1 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 66
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 46 
+    fp_l1 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 46 
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_5_L_1000: ', f'{path}/texts/Y/vigenere/KEY_5_L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L10000_K_5(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+
+def vigenere_L10000_K_5(letter_criterion,bigram_criterion):
+    print("igenere_L10000_K_5:")
+
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+
     p = 4
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 7
+    fp_l1 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 7
     p = 7
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 6
+    fp_l1 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 6
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 100
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
 
-    p = .01
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .01
+    fp_l1 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
     
+    p = .01
+    fp_l2 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 66
+    fp_l1 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 66
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 47 #problem
+    fp_l1 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
 
     p = 60 #problem
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_5_L_10000: ', f'{path}/texts/Y/vigenere/KEY_5_L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L10_K_10(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L10_K_10(letter_criterion,bigram_criterion):
+    print("vigenere_L10_K_10:")
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 100
     p = 2
-    testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 1
+    fp_l1 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 0
-    testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 70
     p = 2
-    testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .005
-    testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .03
+    fp_l1 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .005
+    fp_l2 = testFalse(f'criterian40 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 16
+    fp_l1 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 20
     p = 19
-    testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 1015 #problem
+    fp_l1 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 1015 #problem
-    testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_10_L_10: ', f'{path}/texts/Y/vigenere/KEY_10_L_10_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L100_K_10(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+
+def vigenere_L100_K_10(letter_criterion,bigram_criterion):
+    print("vigenere_L100_K_10:")
+    p_l1 = 10
+    fp_l1 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 1
-    testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 7
+    fp_l1 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 7
     p = 1
-    testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 6
+    fp_l1 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 1
-    testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 1
-    testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .003
-    testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .01
+    fp_l1 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .003
+    fp_l2 = testFalse(f'criterian40 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 20
+    p_l1 = 3
+    fp_l1 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 20
     p = 19
-    testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, bigram_criterion.criterian50, size, p)
+
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 59
+    fp_l1 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 60
-    testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_100: ', f'{path}/texts/X/L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_10_L_100: ', f'{path}/texts/Y/vigenere/KEY_10_L_100_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L1000_K_10(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L1000_K_10(letter_criterion,bigram_criterion):
+    print("vigenere_L1000_K_10:")
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, letter_criterion.criterian20, p_l1)
+
     p = 4
-    testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 7
+    fp_l1 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 7
     p = 7
-    testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 6
+    fp_l1 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 6
-    testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 36
-    testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, bigram_criterion.criterian23, size, p)
 
-    p = .002
-    testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .01
+    fp_l1 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, letter_criterion.criterian40, p_l1)
     
+    p = .002
+    fp_l2 = testFalse(f'criterian40 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 66
+    fp_l1 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 66
-    testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, bigram_criterion.criterian50, size, p)
 
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 47 #problem
+    fp_l1 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
+    
     p = 47 #problem
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_10_L_1000: ', f'{path}/texts/Y/vigenere/KEY_10_L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
 
-def bigram_vigenere_L10000_K_10(criterion):
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+def vigenere_L10000_K_10(letter_criterion,bigram_criterion):
+    print("vigenere_L10000_K_10:")
+    p_l1 = 4
+    fp_l1 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+    fn_l1 = testTrue(f'criterian20 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, letter_criterion.criterian20, p_l1)
+
     p = 3
-    testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian20, p)
-    testTrue(f'criterian20 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian20, p)
+    fp_l2 = testFalse(f'criterian20 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian20, p)
+    fn_l2 = testTrue(f'criterian20 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, bigram_criterion.criterian20, p)
+
+    output('2.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 7
+    fp_l1 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian21 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, letter_criterion.criterian21, size_l1, p_l1)
 
     size = 7
     p = 7
-    testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian21, size, p)
-    testTrue(f'criterian21 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian21, size, p)
+    fp_l2 = testFalse(f'criterian21 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+    fn_l2 = testTrue(f'criterian21 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, bigram_criterion.criterian21, size, p)
+
+    output('2.1',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 1
+    p_l1 = 6
+    fp_l1 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian22 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, letter_criterion.criterian22, size_l1, p_l1)
 
     size = 1
     p = 6
-    testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian22, size, p)
-    testTrue(f'criterian22 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian22, size, p)
+    fp_l2 = testFalse(f'criterian22 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+    fn_l2 = testTrue(f'criterian22 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, bigram_criterion.criterian22, size, p)
+
+    output('2.2',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 7
+    p_l1 = 36
+    fp_l1 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian23 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, letter_criterion.criterian23, size_l1, p_l1)
 
     size = 7
     p = 100
-    testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian23, size, p)
-    testTrue(f'criterian23 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian23, size, p)
+    fp_l2 = testFalse(f'criterian23 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
+    fn_l2 = testTrue(f'criterian23 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, bigram_criterion.criterian23, size, p)
 
-    p = .002
-    testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian40, p)
-    testTrue(f'criterian40 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian40, p)
+    output('2.3',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = .005 #problem
+    fp_l1 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
+    fn_l1 = testTrue(f'criterian40 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, letter_criterion.criterian40, p_l1)
     
+    p = .002
+    fp_l2 = testFalse(f'criterian40 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    fn_l2 = testTrue(f'criterian40 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, bigram_criterion.criterian40, p)
+    
+    output('4.0','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    size_l1 = 100
+    p_l1 = 66
+    fp_l1 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+    fn_l1 = testTrue(f'criterian50 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, letter_criterion.criterian50, size_l1, p_l1)
+
     size = 100
     p = 66
-    testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.criterian50, size, p)
-    testTrue(f'criterian50 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.criterian50, size, p)
+    fp_l2 = testFalse(f'criterian50 X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
+    fn_l2 = testTrue(f'criterian50 Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, bigram_criterion.criterian50, size, p)
 
+    output('5.0',size_l1,p_l1,size,p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    p_l1 = 47 
+    fp_l1 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
+    fn_l1 = testTrueStructural('structural Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, letter_criterion.structuralCriterian, p_l1)
+    
     p = 60
-    testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_10000: ', f'{path}/texts/X/L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/vigenere/KEY_10_L_10000: ', f'{path}/texts/Y/vigenere/KEY_10_L_10000_N_', 1000, bigram_criterion.structuralCriterian, p)
 
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
 
 def main_test():
     letters_frequency = json.loads(read(f'{path}/result/letter_frequency.json'))
-    criterion = Criterion(letters_frequency)
-    print("letters:")
-    letter_affine_L10(criterion)
-    letter_affine_L100(criterion)
-    letter_affine_L1000(criterion)
-    letter_affine_L10000(criterion)
-
-    letter_recursive_L10(criterion)
-    letter_recursive_L100(criterion)
-    letter_recursive_L1000(criterion)
-    letter_recursive_L10000(criterion)
-    
-    letter_uniform_L10(criterion)
-    letter_uniform_L100(criterion)
-    letter_uniform_L1000(criterion)
-    letter_uniform_L10000(criterion)
-    
-    letter_vigenere_L10_K_1(criterion)
-    letter_vigenere_L100_K_1(criterion)
-    letter_vigenere_L1000_K_1(criterion)
-    letter_vigenere_L10000_K_1(criterion)
-
-    letter_vigenere_L10_K_5(criterion)
-    letter_vigenere_L100_K_5(criterion)
-    letter_vigenere_L1000_K_5(criterion)
-    letter_vigenere_L10000_K_5(criterion)
-
-    letter_vigenere_L10_K_10(criterion)
-    letter_vigenere_L100_K_10(criterion)
-    letter_vigenere_L1000_K_10(criterion)
-    letter_vigenere_L10000_K_10(criterion)
-
+    letter_criterion = Criterion(letters_frequency)
     bigrams_frequency =  json.loads(read(f'{path}/result/bigrams_frequency.json'))
-    criterion = Criterion(bigrams_frequency)
-    print("bigram:")
+    bigram_criterion = Criterion(bigrams_frequency)
     
-    bigram_affine_L10(criterion)
-    bigram_affine_L100(criterion)
-    bigram_affine_L1000(criterion)
-    bigram_affine_L10000(criterion)
-
-    bigram_recursive_L10(criterion)
-    bigram_recursive_L100(criterion)
-    bigram_recursive_L1000(criterion)
-    bigram_recursive_L10000(criterion)
-    
-    bigram_uniform_L10(criterion)
-    bigram_uniform_L100(criterion)
-    bigram_uniform_L1000(criterion)
-    bigram_uniform_L10000(criterion)
-    
-    bigram_vigenere_L10_K_1(criterion)
-    bigram_vigenere_L100_K_1(criterion)
-    bigram_vigenere_L1000_K_1(criterion)
-    bigram_vigenere_L10000_K_1(criterion)
-
-    bigram_vigenere_L10_K_5(criterion)
-    bigram_vigenere_L100_K_5(criterion)
-    bigram_vigenere_L1000_K_5(criterion)
-    bigram_vigenere_L10000_K_5(criterion)
-
-    bigram_vigenere_L10_K_10(criterion)
-    bigram_vigenere_L100_K_10(criterion)
-    bigram_vigenere_L1000_K_10(criterion)
-    bigram_vigenere_L10000_K_10(criterion)
+    affine_L10(letter_criterion,bigram_criterion)
+    affine_L100(letter_criterion,bigram_criterion)
+    affine_L1000(letter_criterion,bigram_criterion)
+    affine_L10000(letter_criterion,bigram_criterion)
+    recursive_L10(letter_criterion,bigram_criterion)
+    recursive_L100(letter_criterion,bigram_criterion)
+    recursive_L1000(letter_criterion,bigram_criterion)
+    recursive_L10000(letter_criterion,bigram_criterion)
+    uniform_L10(letter_criterion,bigram_criterion)
+    uniform_L100(letter_criterion,bigram_criterion)
+    uniform_L1000(letter_criterion,bigram_criterion)
+    uniform_L10000(letter_criterion,bigram_criterion)
+    vigenere_L10_K1(letter_criterion,bigram_criterion)
+    vigenere_L100_K_1(letter_criterion,bigram_criterion)
+    vigenere_L1000_K_1(letter_criterion,bigram_criterion)
+    vigenere_L10000_K_1(letter_criterion,bigram_criterion)
+    vigenere_L10_K_5(letter_criterion,bigram_criterion)
+    vigenere_L100_K_5(letter_criterion,bigram_criterion)
+    vigenere_L1000_K_5(letter_criterion,bigram_criterion)
+    vigenere_L10000_K_5(letter_criterion,bigram_criterion)
+    vigenere_L10_K_10(letter_criterion,bigram_criterion)
+    vigenere_L100_K_10(letter_criterion,bigram_criterion)
+    vigenere_L1000_K_10(letter_criterion,bigram_criterion)
+    vigenere_L10000_K_10(letter_criterion,bigram_criterion)
 
 
-    
+
+
 
 if __name__ == '__main__':
     main_test()
