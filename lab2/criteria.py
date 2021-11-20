@@ -359,9 +359,12 @@ def affine_L1000(letter_criterion,bigram_criterion):
     fn_l1 = testTrueStructural('structural Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, letter_criterion.structuralCriterian, p_l1)
 
     p = 48
-    testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
-    testTrueStructural('structural Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fp_l2 = testFalseStructural('structural X/L_1000: ', f'{path}/texts/X/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
+    fn_l2 = testTrueStructural('structural Y/affine/L_1000: ', f'{path}/texts/Y/affine/L_1000_N_', 10000, bigram_criterion.structuralCriterian, p)
 
+    output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
+
+    
 def affine_L10000(letter_criterion,bigram_criterion):
     print("affine L1000:")
 
@@ -768,7 +771,7 @@ def recursive_L10000(letter_criterion,bigram_criterion):
     output('struct','',p_l1,'',p,fp_l1,fn_l1,fp_l2,fn_l2)
 
 def uniform_L10(letter_criterion,bigram_criterion):
-    print("recirsive L10000:")
+    print("uniform L10:")
 
     p_l1 = 1
     fp_l1 = testFalse(f'criterian20 X/L_10: ', f'{path}/texts/X/L_10_N_', 10000, letter_criterion.criterian20, p_l1)
