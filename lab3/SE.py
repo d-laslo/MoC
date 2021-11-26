@@ -1,5 +1,7 @@
 from source import read
 from lab3_operations import *
+import os
+path = os.path.dirname(os.path.abspath(__file__))
 
 class SE:
     @staticmethod
@@ -12,7 +14,7 @@ class SE:
 
 
 if __name__ == '__main__':
-    path = '/mnt/d/Documents/linux/MoC/lab3/vars/SE_vars/SE_RSA_1024_5_hard/01.txt'
+    path = f'{path}/vars/SE_vars/SE_RSA_1024_5_hard/01.txt'
     Ci, Ni = get_data(path)
     e = 5
 
