@@ -1,7 +1,5 @@
 from source import inverse, read
-import math 
 import re
-import gmpy
 
 def CRT(remains, modules):
     M = 1
