@@ -83,20 +83,21 @@ class MitM:
 
 if __name__ == '__main__':
     path_var = f'{path}/vars/MitM_vars/MitM_RSA_2048_56_hard/11.txt'
+    path_precalc = f'{path}/result'
     l = int(re.findall(r'RSA\_\d*\_(\d*)\_', path_var)[0])
     C, N = get_data(path_var)
     e = 65537
-    num_sections = 32
+    num_sections = 512
 
 
     st = time.time()
-    MitM.pre_calc(C[0], N[0], e, l, num_sections, path)
+    MitM.pre_calc(C[0], N[0], e, l, num_sections, path_precalc)
     precalc_time = time.time() - st 
     print(f'{precalc_time}')
     print()
 
     st = time.time()
-    T, S = MitM.result(num_sections, path)
+    T, S = MitM.result(num_sections, path_precalc)
     search_time = time.time() - st 
     print(f'{search_time}')
     print()
