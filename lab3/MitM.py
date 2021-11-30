@@ -70,6 +70,7 @@ class MitM:
         for j in range(0, num_sections):
             shift = quota_size*j
             quota = {}
+            gc.collect()
             for i in range(1, quota_size + 1):
                 T = powmod(mpz(i + shift), e, N)
                 S = t_mod(mul(C, invert(mpz(T), N)), N)
@@ -79,12 +80,13 @@ class MitM:
 
 
 
+
 if __name__ == '__main__':
     path_var = f'{path}/vars/MitM_vars/MitM_RSA_2048_56_hard/11.txt'
     l = int(re.findall(r'RSA\_\d*\_(\d*)\_', path_var)[0])
     C, N = get_data(path_var)
     e = 65537
-    num_sections = 16
+    num_sections = 32
 
 
     st = time.time()
