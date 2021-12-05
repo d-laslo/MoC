@@ -17,6 +17,11 @@ if __name__ == '__main__':
 
     M = SE.result(path, Ci, Ni, e)
 
+    print(f"e = {e}")
     for i in range(len(Ci)):
-        print(hex(M**e % Ni[i]))
+        print(f"C{i+1}: {hex(Ci[i])}")
+        print(f"N{i+1}: {hex(Ni[i])}")
+        print(f"Result: ")
+        print(f"M: {hex(M)}")
+        print(f"C{i+1}=M^e mod N{i+1}: {hex(M**e % Ni[i])}")
         print()
