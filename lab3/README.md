@@ -1,4 +1,4 @@
-#Cryptoanaisis lab3
+# Cryptoanaisis lab3
 
 In odd variant should be bruteforced 2**50 values. Vakhtanh and Vlad didn`t want to run bruteforce on them laptops, so Vakhtanh prepare the server that have 32GB memory and 8core CPU. This server is located at Vakhtanh and Vlad house. 
 
